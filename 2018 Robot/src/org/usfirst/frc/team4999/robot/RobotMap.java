@@ -33,4 +33,5 @@ public class RobotMap {
 	public static Spark backRight = new Spark(3);
 	
 	public static Joystick flightStick = new Joystick(0);
+	public static Joystick logitech = new Joystick(1);
 }
