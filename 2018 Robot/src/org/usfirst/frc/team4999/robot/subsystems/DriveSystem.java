@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  *
  */
 public class DriveSystem extends Subsystem {
+	
 
     private SpeedControllerGroup left = new SpeedControllerGroup(RobotMap.frontRight, RobotMap.backRight);
     private SpeedControllerGroup right = new SpeedControllerGroup(RobotMap.frontLeft, RobotMap.backLeft);
     private DifferentialDrive drive = new DifferentialDrive(left,right);
+    
     
     public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter) {
     	double m_r = clip(moveRequest * speedLimiter, -1, 1);
@@ -31,5 +33,7 @@ public class DriveSystem extends Subsystem {
     	value = Math.min(value, max);
     	return value;
     }
+    
+ 
 }
 
