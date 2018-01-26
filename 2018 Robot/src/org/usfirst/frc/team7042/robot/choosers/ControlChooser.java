@@ -1,6 +1,6 @@
-package org.usfirst.frc.team4999.robot.choosers;
+package org.usfirst.frc.team7042.robot.choosers;
 
-import org.usfirst.frc.team4999.robot.commands.*;
+import org.usfirst.frc.team7042.robot.commands.*;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.TableEntryListener;

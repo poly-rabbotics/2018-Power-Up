@@ -1,7 +1,7 @@
-package org.usfirst.frc.team4999.robot.subsystems;
+package org.usfirst.frc.team7042.robot.subsystems;
 
-import org.usfirst.frc.team4999.robot.RobotMap;
-import org.usfirst.frc.team4999.robot.commands.FlightstickDrive;
+import org.usfirst.frc.team7042.robot.RobotMap;
+import org.usfirst.frc.team7042.robot.commands.FlightstickDrive;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;

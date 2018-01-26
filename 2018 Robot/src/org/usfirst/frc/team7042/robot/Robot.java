@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team4999.robot;
+package org.usfirst.frc.team7042.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import org.usfirst.frc.team4999.robot.commands.FlightstickDrive;
-import org.usfirst.frc.team4999.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team7042.robot.commands.FlightstickDrive;
+import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the

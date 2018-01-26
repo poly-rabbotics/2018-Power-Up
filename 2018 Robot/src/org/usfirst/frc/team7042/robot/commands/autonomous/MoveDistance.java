@@ -1,8 +1,8 @@
-package org.usfirst.frc.team4999.robot.commands.autonomous;
+package org.usfirst.frc.team7042.robot.commands.autonomous;
 
-import org.usfirst.frc.team4999.robot.Robot;
-import org.usfirst.frc.team4999.robot.RobotMap;
-import org.usfirst.frc.team4999.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team7042.robot.Robot;
+import org.usfirst.frc.team7042.robot.RobotMap;
+import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
