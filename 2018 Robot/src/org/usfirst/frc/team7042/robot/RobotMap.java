@@ -38,7 +38,10 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(0,1);
 	public static Encoder rightEncoder = new Encoder(2,3);
+	public static double driveTicksPerMeter = 10;
+	public static double driveDistanceBetweenWheels = 0.5; // meters
 	
     public static final double auto_speed = 0.25;
+    
 
 }

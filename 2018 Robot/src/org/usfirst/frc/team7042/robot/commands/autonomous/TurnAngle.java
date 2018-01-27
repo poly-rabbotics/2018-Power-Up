@@ -14,26 +14,39 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class MoveDistance extends Command {
+public class TurnAngle extends Command {
 	
 	private Encoder left = RobotMap.leftEncoder;
 	private Encoder right = RobotMap.rightEncoder;
 	
 	private double ticksPerMeter = RobotMap.driveTicksPerMeter;
 	
-	private PIDController distanceController;
+	private PIDController angleController;
 	
-	private double distance;
+	private double angle;
+	private EncoderTurnOutput angleGetter;
+
 	
-	static class AvgEncoderOutput implements PIDSource {
+	static class EncoderTurnOutput implements PIDSource {
 		
 		private Encoder left, right;
+		private double lStart, rStart;
 		
 		private PIDSourceType sourcetype = PIDSourceType.kDisplacement;
 		
-		public AvgEncoderOutput(Encoder left, Encoder right) {
+		
+		public EncoderTurnOutput(Encoder left, Encoder right) {
 			this.left = left;
 			this.right = right;
+			lStart = left.getDistance();
+			rStart = right.getDistance();
+		}
+		
+		private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
+	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/RobotMap.driveDistanceBetweenWheels) * 360;
+	    }
+		private double getAngleRate() {
+			return ((left.getRate() - right.getRate())/RobotMap.driveDistanceBetweenWheels) * 360;
 		}
 
 		@Override
@@ -50,50 +63,38 @@ public class MoveDistance extends Command {
 		public double pidGet() {
 			switch(sourcetype) {
 			case kRate:
-				return (left.getRate() + right.getRate()) / 2;
+				return getAngleRate();
 			case kDisplacement:
 			default:
-				return (left.getDistance() + right.getDistance()) / 2;
+				return getAngle();
 			}
 		}
 		
 	}
 	
-	static class DriveWithAngleCorrection implements PIDOutput {
+	static class DriveTurn implements PIDOutput {
 		private DriveSystem output;
-		private Encoder left, right;
-		private double lStart, rStart;
 		
-		private final double moveErrGain = 0.1;
-		
-		public DriveWithAngleCorrection(DriveSystem output, Encoder left, Encoder right) {
+		public DriveTurn(DriveSystem output) {
 			this.output = output;
-			this.left = left;
-			this.right = right;
-			this.lStart = left.getDistance();
-			this.rStart = right.getDistance();
 		}
-		
-		 private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
-	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/RobotMap.driveDistanceBetweenWheels) * 360;
-	    }
-
 		@Override
 		public void pidWrite(double output) {
-			this.output.arcadeDrive(output, getAngle() * moveErrGain, RobotMap.auto_speed);
+			this.output.arcadeDrive(0, output, RobotMap.auto_speed);
 		}
 		
 	}
 
-    public MoveDistance(double distance) {
+    public TurnAngle(double angle) {
     	requires(Robot.drive);
-    	this.distance = distance;
-    	distanceController = new PIDController(
+    	this.angle = angle;
+    	angleGetter = new EncoderTurnOutput(left, right);
+    	angleController = new PIDController(
     			0.2,
     			0,
     			0.01,
-    			new AvgEncoderOutput(left, right),
-    			new DriveWithAngleCorrection(Robot.drive, left, right)
+    			new EncoderTurnOutput(left, right),
+    			new DriveTurn(Robot.drive)
     			);
     }
 
@@ -101,8 +102,8 @@ public class MoveDistance extends Command {
     protected void initialize() {
     	left.setDistancePerPulse(1/ticksPerMeter);
     	right.setDistancePerPulse(1/ticksPerMeter);
-    	distanceController.setSetpoint(((left.getDistance() + right.getDistance()) / 2) + distance);
-    	distanceController.enable();
+    	angleController.setSetpoint(angleGetter.getAngle() + angle);
+    	angleController.enable();
     }
     
     // Called repeatedly when this Command is scheduled to run
@@ -112,17 +113,17 @@ public class MoveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return distanceController.onTarget();
+        return angleController.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	distanceController.disable();
+    	angleController.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	distanceController.disable();
+    	angleController.disable();
     }
 }
