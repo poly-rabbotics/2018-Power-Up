@@ -7,9 +7,12 @@
 
 package org.usfirst.frc.team7042.robot;
 
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -43,5 +46,9 @@ public class RobotMap {
 	
     public static final double auto_speed = 0.25;
     
+    public static DoubleSolenoid liftSolenoid = new DoubleSolenoid(0, 1);
+    
+    public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
+    public static Encoder liftEncoder = new Encoder(4,5); // Just for an example
 
 }

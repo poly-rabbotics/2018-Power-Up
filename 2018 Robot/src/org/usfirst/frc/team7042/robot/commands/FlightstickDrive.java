@@ -13,6 +13,7 @@ public class FlightstickDrive extends Command {
 	
 	private final double DEADZONE = 0.1;
 	private final double CURVE = 2.5;
+	private boolean s1;
 	
 	private Joystick flightstick = RobotMap.flightStick;
 
@@ -36,6 +37,10 @@ public class FlightstickDrive extends Command {
     	double s_l = (-flightstick.getThrottle() + 1) / 2;
     	
     	Robot.drive.arcadeDrive(m_r, t_r, s_l);
+    	
+    	s1 = flightstick.getTrigger();
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

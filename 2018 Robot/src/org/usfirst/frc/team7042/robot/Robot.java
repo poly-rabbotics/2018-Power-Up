@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import org.usfirst.frc.team7042.robot.commands.FlightstickDrive;
 import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team7042.robot.subsystems.Lift;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +25,8 @@ import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
 public class Robot extends TimedRobot {
 	public static final DriveSystem drive = new DriveSystem();
 	public static OI m_oi;
+	
+	public static final Lift lift = new Lift();
 	
 	private Command teleopCommand = new FlightstickDrive();
 
