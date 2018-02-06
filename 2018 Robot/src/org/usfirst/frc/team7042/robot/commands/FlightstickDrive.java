@@ -13,6 +13,7 @@ public class FlightstickDrive extends Command {
 	
 	private final double DEADZONE = 0.1;
 	private final double CURVE = 2.5;
+	private boolean s1;
 	
 	private Joystick flightstick = RobotMap.flightStick;
 
@@ -37,7 +38,8 @@ public class FlightstickDrive extends Command {
     	
     	Robot.drive.arcadeDrive(m_r, t_r, s_l);
     	
-    	//System.out.format("Left: %d, Right: %d\n", Robot.drive.leftEnc.get(), Robot.drive.rightEnc.get());
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
