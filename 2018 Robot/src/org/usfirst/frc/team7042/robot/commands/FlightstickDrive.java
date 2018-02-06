@@ -36,6 +36,8 @@ public class FlightstickDrive extends Command {
     	double s_l = (-flightstick.getThrottle() + 1) / 2;
     	
     	Robot.drive.arcadeDrive(m_r, t_r, s_l);
+    	
+    	//System.out.format("Left: %d, Right: %d\n", Robot.drive.leftEnc.get(), Robot.drive.rightEnc.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()

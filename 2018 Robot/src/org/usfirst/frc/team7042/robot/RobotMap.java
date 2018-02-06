@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team7042.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Spark;
@@ -36,10 +37,12 @@ public class RobotMap {
 	public static Joystick flightStick = new Joystick(0);
 	public static Joystick logitech = new Joystick(1);
 	
-	public static Encoder leftEncoder = new Encoder(0,1);
-	public static Encoder rightEncoder = new Encoder(2,3);
+	public static Encoder leftEncoder = new Encoder(6,7);
+	public static Encoder rightEncoder = new Encoder(8,9);
 	public static double driveTicksPerMeter = 10;
 	public static double driveDistanceBetweenWheels = 0.5; // meters
+	
+	public static Compressor comp = new Compressor();
 	
     public static final double auto_speed = 0.25;
     
