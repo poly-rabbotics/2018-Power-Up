@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team7042.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -43,6 +44,8 @@ public class RobotMap {
 	public static Encoder rightEncoder = new Encoder(8,9);
 	public static double driveTicksPerMeter = 761.854104;
 	public static double driveDistanceBetweenWheels = 0.5; // meters
+	
+	public static Compressor comp = new Compressor();
 	
     public static final double auto_speed = 0.25;
     

@@ -37,9 +37,6 @@ public class FlightstickDrive extends Command {
     	
     	Robot.drive.arcadeDrive(m_r, t_r, s_l);
     	
-    	// Following code for calibration purposes only
-    	System.out.format("Left: %.2fm, Right: %.2fm\n", RobotMap.leftEncoder.getDistance(), RobotMap.rightEncoder.getDistance());
-    	
     	if(flightstick.getRawButton(5)) {
     		RobotMap.leftEncoder.reset();
     		RobotMap.rightEncoder.reset();
