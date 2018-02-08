@@ -39,9 +39,9 @@ public class RobotMap {
 	public static Joystick flightStick = new Joystick(0);
 	public static Joystick logitech = new Joystick(1);
 	
-	public static Encoder leftEncoder = new Encoder(0,1);
-	public static Encoder rightEncoder = new Encoder(2,3);
-	public static double driveTicksPerMeter = 10;
+	public static Encoder leftEncoder = new Encoder(6,7);
+	public static Encoder rightEncoder = new Encoder(8,9);
+	public static double driveTicksPerMeter = 761.854104;
 	public static double driveDistanceBetweenWheels = 0.5; // meters
 	
     public static final double auto_speed = 0.25;

@@ -11,9 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class FlightstickDrive extends Command {
 	
-	private final double DEADZONE = 0.1;
-	private final double CURVE = 2.5;
-	private boolean s1;
+	private final double DEADZONE = 0.05;
+	private final double CURVE = 1;
 	
 	private Joystick flightstick = RobotMap.flightStick;
 
@@ -38,8 +37,13 @@ public class FlightstickDrive extends Command {
     	
     	Robot.drive.arcadeDrive(m_r, t_r, s_l);
     	
-    	s1 = flightstick.getTrigger();
+    	// Following code for calibration purposes only
+    	System.out.format("Left: %.2fm, Right: %.2fm\n", RobotMap.leftEncoder.getDistance(), RobotMap.rightEncoder.getDistance());
     	
+    	if(flightstick.getRawButton(5)) {
+    		RobotMap.leftEncoder.reset();
+    		RobotMap.rightEncoder.reset();
+    	}
     	
     }
 
