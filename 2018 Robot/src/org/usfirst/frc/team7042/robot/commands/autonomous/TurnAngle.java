@@ -1,5 +1,6 @@
 package org.usfirst.frc.team7042.robot.commands.autonomous;
 
+import org.usfirst.frc.team7042.robot.PolyPrefs;
 import org.usfirst.frc.team7042.robot.Robot;
 import org.usfirst.frc.team7042.robot.RobotMap;
 import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
@@ -19,7 +20,6 @@ public class TurnAngle extends Command {
 	private Encoder left = RobotMap.leftEncoder;
 	private Encoder right = RobotMap.rightEncoder;
 	
-	private double ticksPerMeter = RobotMap.driveTicksPerMeter;
 	
 	private PIDController angleController;
 	
@@ -43,10 +43,10 @@ public class TurnAngle extends Command {
 		}
 		
 		private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
-	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/RobotMap.driveDistanceBetweenWheels) * 360;
+	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/PolyPrefs.getWheelDist()) * 360;
 	    }
 		private double getAngleRate() {
-			return ((left.getRate() - right.getRate())/RobotMap.driveDistanceBetweenWheels) * 360;
+			return ((left.getRate() - right.getRate())/PolyPrefs.getWheelDist()) * 360;
 		}
 
 		@Override
@@ -80,7 +80,7 @@ public class TurnAngle extends Command {
 		}
 		@Override
 		public void pidWrite(double output) {
-			this.output.arcadeDrive(0, output, RobotMap.auto_speed);
+			this.output.arcadeDrive(0, output, PolyPrefs.getAutoSpeed());
 		}
 		
 	}
@@ -100,8 +100,6 @@ public class TurnAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	left.setDistancePerPulse(1/ticksPerMeter);
-    	right.setDistancePerPulse(1/ticksPerMeter);
     	angleController.setSetpoint(angleGetter.getAngle() + angle);
     	angleController.enable();
     }

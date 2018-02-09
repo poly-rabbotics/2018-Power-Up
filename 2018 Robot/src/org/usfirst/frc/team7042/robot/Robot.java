@@ -37,8 +37,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		RobotMap.leftEncoder.setDistancePerPulse(1/RobotMap.driveTicksPerMeter);
-		RobotMap.rightEncoder.setDistancePerPulse(1/RobotMap.driveTicksPerMeter);
+		RobotMap.leftEncoder.setDistancePerPulse(1/PolyPrefs.getEncTicks());
+		RobotMap.rightEncoder.setDistancePerPulse(1/PolyPrefs.getEncTicks());
 	}
 
 	/**

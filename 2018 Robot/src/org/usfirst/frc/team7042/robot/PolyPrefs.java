@@ -10,6 +10,8 @@ public class PolyPrefs {
 	private static final double MOVE_D = 0;
 	private static final double MOVE_ERR_GAIN = 0;
 	private static final double WHEEL_DIST = 0;
+	private static final double ENC_TICKS = 761.854104;
+	private static final double AUTO_SPEED = 0.25;
 	
 	private static void checkDouble(String key, double value) {
 		if(!prefs.containsKey(key))
@@ -35,5 +37,13 @@ public class PolyPrefs {
 	public static double getWheelDist() {
 		checkDouble("WHEEL_DIST", WHEEL_DIST);
 		return prefs.getDouble("WHEEL_DIST", WHEEL_DIST);
+	}
+	public static double getEncTicks() {
+		checkDouble("ENC_TICKS", ENC_TICKS);
+		return prefs.getDouble("ENC_TICKS", ENC_TICKS);
+	}
+	public static double getAutoSpeed() {
+		checkDouble("AUTO_SPEED", AUTO_SPEED);
+		return prefs.getDouble("AUTO_SPEED", AUTO_SPEED);
 	}
 }

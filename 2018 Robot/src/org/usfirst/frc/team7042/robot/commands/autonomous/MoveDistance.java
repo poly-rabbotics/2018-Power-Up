@@ -1,5 +1,6 @@
 package org.usfirst.frc.team7042.robot.commands.autonomous;
 
+import org.usfirst.frc.team7042.robot.PolyPrefs;
 import org.usfirst.frc.team7042.robot.Robot;
 import org.usfirst.frc.team7042.robot.RobotMap;
 import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
@@ -19,7 +20,6 @@ public class MoveDistance extends Command {
 	private Encoder left = RobotMap.leftEncoder;
 	private Encoder right = RobotMap.rightEncoder;
 	
-	private double ticksPerMeter = RobotMap.driveTicksPerMeter;
 	
 	private PIDController distanceController;
 	
@@ -75,12 +75,12 @@ public class MoveDistance extends Command {
 		}
 		
 		 private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
-	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/RobotMap.driveDistanceBetweenWheels) * 360;
+	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/PolyPrefs.getWheelDist()) * 360;
 	    }
 
 		@Override
 		public void pidWrite(double output) {
-			this.output.arcadeDrive(output, getAngle() * moveErrGain, RobotMap.auto_speed);
+			this.output.arcadeDrive(output, getAngle() * moveErrGain, PolyPrefs.getAutoSpeed());
 		}
 		
 	}
@@ -99,8 +99,6 @@ public class MoveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	left.setDistancePerPulse(1/ticksPerMeter);
-    	right.setDistancePerPulse(1/ticksPerMeter);
     	distanceController.setSetpoint(((left.getDistance() + right.getDistance()) / 2) + distance);
     	distanceController.enable();
     }
