@@ -46,7 +46,7 @@ public class TurnAngle extends Command {
 	    	return 180*((left.getDistance() - lStart) - (right.getDistance() - rStart) / (Math.PI * PolyPrefs.getWheelDist()));
 	    }
 		private double getAngleRate() {
-			return ((left.getRate() - right.getRate())/PolyPrefs.getWheelDist()) * 360;
+			return 180*(left.getRate() - right.getRate()) / (Math.PI * PolyPrefs.getWheelDist());
 		}
 
 		@Override
@@ -90,9 +90,9 @@ public class TurnAngle extends Command {
     	this.angle = angle;
     	angleGetter = new EncoderTurnOutput(left, right);
     	angleController = new PIDController(
-    			0.2,
-    			0,
-    			0.01,
+    			PolyPrefs.getTurnP(),
+    			PolyPrefs.getTurnI(),
+    			PolyPrefs.getTurnD(),
     			new EncoderTurnOutput(left, right),
     			new DriveTurn(Robot.drive)
     			);

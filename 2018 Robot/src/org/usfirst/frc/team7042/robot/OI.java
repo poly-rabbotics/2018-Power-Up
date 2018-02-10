@@ -12,6 +12,7 @@ import org.usfirst.frc.team7042.robot.commands.ActuateLiftPiston;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team7042.robot.commands.autonomous.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,10 +47,10 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	JoystickButton actuateLift = new JoystickButton(RobotMap.flightStick, 1);
+	JoystickButton trigger = new JoystickButton(RobotMap.flightStick, 1);
 	
 	public OI() {
-		actuateLift.whenActive(new ActuateLiftPiston());
+		trigger.whenActive(new TurnAngle(90));
 	}
 	
 }
