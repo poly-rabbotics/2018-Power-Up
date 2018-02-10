@@ -89,9 +89,9 @@ public class MoveDistance extends Command {
     	requires(Robot.drive);
     	this.distance = distance;
     	distanceController = new PIDController(
-    			0.2,
-    			0,
-    			0.01,
+    			PolyPrefs.getMoveP(),
+    			PolyPrefs.getMoveI(),
+    			PolyPrefs.getMoveD(),
     			new AvgEncoderOutput(left, right),
     			new DriveWithAngleCorrection(Robot.drive, left, right)
     			);

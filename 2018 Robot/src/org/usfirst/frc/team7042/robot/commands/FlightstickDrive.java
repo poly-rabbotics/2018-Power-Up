@@ -1,5 +1,6 @@
 package org.usfirst.frc.team7042.robot.commands;
 
+import org.usfirst.frc.team7042.robot.PolyPrefs;
 import org.usfirst.frc.team7042.robot.Robot;
 import org.usfirst.frc.team7042.robot.RobotMap;
 
@@ -41,6 +42,8 @@ public class FlightstickDrive extends Command {
     		RobotMap.leftEncoder.reset();
     		RobotMap.rightEncoder.reset();
     	}
+    	double angle = 180*(RobotMap.leftEncoder.getRate() - RobotMap.rightEncoder.getRate()) / (Math.PI * PolyPrefs.getWheelDist());
+    	System.out.format("Move: %.2f m/s Turn: %.2f degrees / sec\n", (RobotMap.leftEncoder.getRate() + RobotMap.rightEncoder.getRate()) / 2, angle);
     	
     }
 

@@ -43,7 +43,7 @@ public class TurnAngle extends Command {
 		}
 		
 		private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
-	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/PolyPrefs.getWheelDist()) * 360;
+	    	return 180*((left.getDistance() - lStart) - (right.getDistance() - rStart) / (Math.PI * PolyPrefs.getWheelDist()));
 	    }
 		private double getAngleRate() {
 			return ((left.getRate() - right.getRate())/PolyPrefs.getWheelDist()) * 360;
