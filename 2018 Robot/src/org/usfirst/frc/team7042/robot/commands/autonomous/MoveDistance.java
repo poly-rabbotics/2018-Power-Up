@@ -24,6 +24,7 @@ public class MoveDistance extends Command {
 	private PIDController distanceController;
 	
 	private double distance;
+	DriveWithAngleCorrection drv;
 	
 	static class AvgEncoderOutput implements PIDSource {
 		
@@ -60,27 +61,20 @@ public class MoveDistance extends Command {
 	}
 	
 	static class DriveWithAngleCorrection implements PIDOutput {
-		private DriveSystem output;
-		private Encoder left, right;
-		private double lStart, rStart;
-		
+		private double angleOffset = 0;
 		private final double moveErrGain = 0.1;
 		
-		public DriveWithAngleCorrection(DriveSystem output, Encoder left, Encoder right) {
-			this.output = output;
-			this.left = left;
-			this.right = right;
-			this.lStart = left.getDistance();
-			this.rStart = right.getDistance();
-		}
-		
-		 private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
-	    	return (((left.getDistance() - lStart) - (right.getDistance() - rStart))/PolyPrefs.getWheelDist()) * 360;
+		private double getAngle() {
+	    	return -(RobotMap.ahrs.getAngle() - angleOffset);
 	    }
+		
+		public void resetAngle() {
+			angleOffset = RobotMap.ahrs.getAngle();
+		}
 
 		@Override
 		public void pidWrite(double output) {
-			this.output.arcadeDrive(output, getAngle() * moveErrGain, PolyPrefs.getAutoSpeed());
+			Robot.drive.arcadeDrive(output, getAngle() * moveErrGain, PolyPrefs.getAutoSpeed());
 		}
 		
 	}
@@ -88,18 +82,20 @@ public class MoveDistance extends Command {
     public MoveDistance(double distance) {
     	requires(Robot.drive);
     	this.distance = distance;
+    	drv = new DriveWithAngleCorrection();
     	distanceController = new PIDController(
     			PolyPrefs.getMoveP(),
     			PolyPrefs.getMoveI(),
     			PolyPrefs.getMoveD(),
     			new AvgEncoderOutput(left, right),
-    			new DriveWithAngleCorrection(Robot.drive, left, right)
+    			drv
     			);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	distanceController.setSetpoint(((left.getDistance() + right.getDistance()) / 2) + distance);
+    	drv.resetAngle();
     	distanceController.enable();
     }
     
@@ -116,11 +112,13 @@ public class MoveDistance extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	distanceController.disable();
+    	Robot.drive.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
     	distanceController.disable();
+    	Robot.drive.stop();
     }
 }

@@ -31,6 +31,10 @@ public class DriveSystem extends Subsystem {
         setDefaultCommand(new FlightstickDrive());
     }
     
+    public void stop() {
+    	arcadeDrive(0,0,0);
+    }
+    
     private double clip(double value, double min, double max) {
     	value = Math.max(value, min);
     	value = Math.min(value, max);

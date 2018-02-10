@@ -21,9 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TurnAngle extends Command {
 	
-	private Encoder left = RobotMap.leftEncoder;
-	private Encoder right = RobotMap.rightEncoder;
-	
 	
 	private PIDController angleController;
 	
