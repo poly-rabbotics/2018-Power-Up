@@ -5,6 +5,8 @@ import org.usfirst.frc.team7042.robot.Robot;
 import org.usfirst.frc.team7042.robot.RobotMap;
 import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -26,31 +28,17 @@ public class TurnAngle extends Command {
 	private PIDController angleController;
 	
 	private double angle;
-	private EncoderTurnOutput angleGetter;
+	private AHRSInterface angleGetter;
 	
 	Timer onTargetTimer = new Timer();
 
 	
-	static class EncoderTurnOutput implements PIDSource {
-		
-		private Encoder left, right;
-		private double lStart, rStart;
-		
+	static class AHRSInterface implements PIDSource {
+		private AHRS ahrs = RobotMap.ahrs;
 		private PIDSourceType sourcetype = PIDSourceType.kDisplacement;
 		
-		
-		public EncoderTurnOutput(Encoder left, Encoder right) {
-			this.left = left;
-			this.right = right;
-			lStart = left.getDistance();
-			rStart = right.getDistance();
-		}
-		
-		private double getAngle() { // Positive is clockwise. Returns drift angle, multiply by -1 to get correction
-	    	return 180*((left.getDistance() - lStart) - (right.getDistance() - rStart) / (Math.PI * PolyPrefs.getWheelDist()));
-	    }
-		private double getAngleRate() {
-			return 180*(left.getRate() - right.getRate()) / (Math.PI * PolyPrefs.getWheelDist());
+		public double getAngle() {
+			return ahrs.getAngle();
 		}
 
 		@Override
@@ -67,10 +55,10 @@ public class TurnAngle extends Command {
 		public double pidGet() {
 			switch(sourcetype) {
 			case kRate:
-				return getAngleRate();
+				return ahrs.getRate();
 			case kDisplacement:
 			default:
-				return getAngle();
+				return ahrs.getAngle();
 			}
 		}
 		
@@ -88,12 +76,12 @@ public class TurnAngle extends Command {
     public TurnAngle(double angle) {
     	requires(Robot.drive);
     	this.angle = angle;
-    	angleGetter = new EncoderTurnOutput(left, right);
+    	angleGetter = new AHRSInterface();
     	angleController = new PIDController(
     			PolyPrefs.getTurnP(),
     			PolyPrefs.getTurnI(),
     			PolyPrefs.getTurnD(),
-    			new EncoderTurnOutput(left, right),
+    			angleGetter,
     			new DriveTurn()
     			);
     	angleController.setAbsoluteTolerance(PolyPrefs.getTolerance());

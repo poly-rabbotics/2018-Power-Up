@@ -7,6 +7,10 @@
 
 package org.usfirst.frc.team7042.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
+
 import edu.wpi.first.wpilibj.Compressor;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -50,5 +54,7 @@ public class RobotMap {
     
     public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
     public static Encoder liftEncoder = new Encoder(4,5); // Just for an example
+    
+    public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
 }
