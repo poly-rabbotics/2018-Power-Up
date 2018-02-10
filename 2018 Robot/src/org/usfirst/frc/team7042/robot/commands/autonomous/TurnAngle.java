@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -25,6 +27,8 @@ public class TurnAngle extends Command {
 	
 	private double angle;
 	private EncoderTurnOutput angleGetter;
+	
+	Timer onTargetTimer = new Timer();
 
 	
 	static class EncoderTurnOutput implements PIDSource {
@@ -73,14 +77,10 @@ public class TurnAngle extends Command {
 	}
 	
 	static class DriveTurn implements PIDOutput {
-		private DriveSystem output;
 		
-		public DriveTurn(DriveSystem output) {
-			this.output = output;
-		}
 		@Override
 		public void pidWrite(double output) {
-			this.output.arcadeDrive(0, output, PolyPrefs.getAutoSpeed());
+			Robot.drive.arcadeDrive(0, -output, PolyPrefs.getAutoSpeed());
 		}
 		
 	}
@@ -94,24 +94,35 @@ public class TurnAngle extends Command {
     			PolyPrefs.getTurnI(),
     			PolyPrefs.getTurnD(),
     			new EncoderTurnOutput(left, right),
-    			new DriveTurn(Robot.drive)
+    			new DriveTurn()
     			);
+    	angleController.setAbsoluteTolerance(PolyPrefs.getTolerance());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	angleController.setSetpoint(angleGetter.getAngle() + angle);
     	angleController.enable();
+    	onTargetTimer.start();
+    	System.out.println("Starting turn. Setpoint set to "+angleController.getSetpoint());
+    	System.out.format("P:%.2f I:%.2f D:%.2f\n", angleController.getP(), angleController.getI(), angleController.getD());
     }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	System.out.format("Current: %.2f, Setpoint: %.2f, Output: %.2f\n", angleGetter.getAngle(), angleController.getSetpoint(), angleController.get());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return angleController.onTarget();
+        if(angleController.onTarget()) {
+        	if(onTargetTimer.hasPeriodPassed(PolyPrefs.getTargetTime())) {
+        		return true;
+        	}
+        } else {
+        	onTargetTimer.reset();
+        }
+        return false;
     }
 
     // Called once after isFinished returns true

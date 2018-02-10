@@ -21,6 +21,8 @@ import org.usfirst.frc.team7042.robot.subsystems.Lift;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
  * project.
+ * 
+ * Max speed: Left - 3.19m/s, Right - 3.25m/s
  */
 public class Robot extends TimedRobot {
 	public static final DriveSystem drive = new DriveSystem();

@@ -24,7 +24,7 @@ public class DriveSystem extends Subsystem {
     public void arcadeDrive(double moveRequest, double turnRequest, double speedLimiter) {
     	double m_r = clip(moveRequest * speedLimiter, -1, 1);
     	double t_r = clip(turnRequest * speedLimiter, -1, 1);
-    	drive.arcadeDrive(m_r, t_r);
+    	drive.arcadeDrive(m_r, t_r, false);
     }
 
     public void initDefaultCommand() {

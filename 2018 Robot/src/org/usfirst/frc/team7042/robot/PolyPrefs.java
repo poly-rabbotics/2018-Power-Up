@@ -12,9 +12,11 @@ public class PolyPrefs {
 	private static final double TURN_I = 0;
 	private static final double TURN_D = 0;
 	private static final double MOVE_ERR_GAIN = 0;
-	private static final double WHEEL_DIST = 0;
+	private static final double WHEEL_DIST = 0.61;
 	private static final double ENC_TICKS = 761.854104;
 	private static final double AUTO_SPEED = 0.25;
+	private static final double TOLERANCE = 2;
+	private static final double TARGET_TIME = 2;
 	
 	
 	private static void checkDouble(String key, double value) {
@@ -61,5 +63,13 @@ public class PolyPrefs {
 	public static double getAutoSpeed() {
 		checkDouble("AUTO_SPEED", AUTO_SPEED);
 		return prefs.getDouble("AUTO_SPEED", AUTO_SPEED);
+	}
+	public static double getTolerance() {
+		checkDouble("TOLERANCE", TOLERANCE);
+		return prefs.getDouble("TOLERANCE", TOLERANCE);
+	}
+	public static double getTargetTime() {
+		checkDouble("TARGET_TIME", TARGET_TIME);
+		return prefs.getDouble("TARGET_TIME", TARGET_TIME);
 	}
 }

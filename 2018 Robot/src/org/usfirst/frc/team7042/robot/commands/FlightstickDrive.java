@@ -42,8 +42,12 @@ public class FlightstickDrive extends Command {
     		RobotMap.leftEncoder.reset();
     		RobotMap.rightEncoder.reset();
     	}
-    	double angle = 180*(RobotMap.leftEncoder.getRate() - RobotMap.rightEncoder.getRate()) / (Math.PI * PolyPrefs.getWheelDist());
-    	System.out.format("Move: %.2f m/s Turn: %.2f degrees / sec\n", (RobotMap.leftEncoder.getRate() + RobotMap.rightEncoder.getRate()) / 2, angle);
+    	if(flightstick.getRawButton(6)) {
+    		System.out.format("Left:%.2fm/s Right:%.2fm/s\n", RobotMap.leftEncoder.getRate(), RobotMap.rightEncoder.getRate());
+    		//System.out.println("Left:" + RobotMap.leftEncoder.getDistance() +" Right:" + RobotMap.rightEncoder.getDistance());
+        	//System.out.println("Angle: " + (180*(RobotMap.leftEncoder.getDistance() - RobotMap.rightEncoder.getDistance()) / (Math.PI * PolyPrefs.getWheelDist())));
+    	}
+    	
     	
     }
 
