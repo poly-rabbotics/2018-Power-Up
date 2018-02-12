@@ -7,12 +7,10 @@
 
 package org.usfirst.frc.team7042.robot;
 
-import org.usfirst.frc.team7042.robot.commands.ActuateLiftPiston;
+import org.usfirst.frc.team7042.commands.*;
+import org.usfirst.frc.team7042.triggers.*;
 
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import org.usfirst.frc.team7042.robot.commands.autonomous.*;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -47,10 +45,8 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	
-	JoystickButton trigger = new JoystickButton(RobotMap.flightStick, 1);
-	
+	Trigger killPID = new KillPID();
 	public OI() {
-		trigger.whenActive(new TurnAngle(90));
+		killPID.whenActive(new TeleopNoPID());
 	}
-	
 }

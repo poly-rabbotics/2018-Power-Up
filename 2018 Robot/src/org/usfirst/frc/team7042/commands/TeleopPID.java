@@ -1,0 +1,65 @@
+package org.usfirst.frc.team7042.commands;
+
+import org.usfirst.frc.team7042.robot.Robot;
+import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
+import org.usfirst.frc.team7042.robot.controllers.DriveController;
+import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team7042.utils.PolyPrefs;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+/**
+ *
+ */
+public class TeleopPID extends Command {
+	
+	private DriveSystem drive = Robot.driveSystem;
+	private ControlChooser chooser = Robot.controlChooser;
+	
+	private boolean reversed;
+	
+    public TeleopPID() {
+    	requires(drive);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	drive.moveRatePID.enable();
+    	drive.turnRatePID.enable();
+    	drive.pitchPID.enable();
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	DriveController controller = chooser.getSelected();
+    	
+    	if(controller.getReverseDirection())
+    		reversed = !reversed;
+    	
+    	double moveRequest = controller.map(controller.getMoveRequest() * controller.getSpeedLimiter(), -1, 1, -PolyPrefs.getMaxMoveSpeed(), PolyPrefs.getMaxMoveSpeed());
+    	moveRequest = (reversed)?-moveRequest:moveRequest;
+    	double turnRequest = controller.map(controller.getTurnRequest() * controller.getSpeedLimiter(), -1, 1, -PolyPrefs.getMaxTurnSpeed(), PolyPrefs.getMaxTurnSpeed());
+    	
+    	drive.moveRatePID.setSetpoint(moveRequest);
+    	drive.turnRatePID.setSetpoint(turnRequest);
+    	
+    	if(moveRequest == 0 && turnRequest != 0)
+    		drive.driveTurnRatePID();
+    	else
+    		drive.driveMoveRatePID();
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
+}

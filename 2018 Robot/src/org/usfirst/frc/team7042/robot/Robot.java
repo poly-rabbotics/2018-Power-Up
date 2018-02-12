@@ -7,13 +7,14 @@
 
 package org.usfirst.frc.team7042.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import org.usfirst.frc.team7042.robot.commands.FlightstickDrive;
+import org.usfirst.frc.team7042.commands.TeleopPID;
+import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
 import org.usfirst.frc.team7042.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team7042.robot.subsystems.Lift;
+import org.usfirst.frc.team7042.utils.PolyPrefs;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,16 +22,12 @@ import org.usfirst.frc.team7042.robot.subsystems.Lift;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.properties file in the
  * project.
- * 
- * Max speed: Left - 3.19m/s, Right - 3.25m/s
  */
 public class Robot extends TimedRobot {
-	public static final DriveSystem drive = new DriveSystem();
+	public static final DriveSystem driveSystem = new DriveSystem();
 	public static OI m_oi;
-	
-	public static final Lift lift = new Lift();
-	
-	private Command teleopCommand = new FlightstickDrive();
+	public static ControlChooser controlChooser = new ControlChooser();
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -39,6 +36,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+
 		RobotMap.leftEncoder.setDistancePerPulse(1/PolyPrefs.getEncTicks());
 		RobotMap.rightEncoder.setDistancePerPulse(1/PolyPrefs.getEncTicks());
 	}
@@ -50,7 +48,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
 	}
 
 	@Override
@@ -71,7 +68,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		System.out.println(DriverStation.getInstance().getGameSpecificMessage());
 	}
 
 	/**
@@ -79,12 +76,12 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-	}
+ 	}
 
 	@Override
 	public void teleopInit() {
-		teleopCommand.start();
+		TeleopPID teleopPID = new TeleopPID();
+		teleopPID.start();
 	}
 
 	/**
@@ -95,10 +92,16 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	@Override
+	public void testInit() {
+	}
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
 	public void testPeriodic() {
+		//System.out.format("Angle:%.2f Rate:%.2f Pitch:%.2f Roll:%.2f xV:%.2f yV:%.2f\n", RobotMap.pi.getAngle(), RobotMap.pi.getRate(), RobotMap.pi.getPitch(), RobotMap.pi.getRoll(), RobotMap.pi.getXVelocity(), RobotMap.pi.getYVelocity());
+		
+		Robot.driveSystem.driveTurnPID();
 	}
 }
