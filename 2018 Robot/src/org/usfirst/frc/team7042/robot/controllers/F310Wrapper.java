@@ -4,19 +4,20 @@ import org.usfirst.frc.team7042.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class FlightStickWrapper extends DriveController {
+public class F310Wrapper extends DriveController {
 	
-	private Joystick flightStick = RobotMap.flightStick;
+	private Joystick logitech = RobotMap.logitech;
 	
-	private static final double MOVE_CURVE = 2;
-	private static final double TURN_CURVE = 1;
+	private static final double MOVE_CURVE = 2.5;
+	private static final double TURN_CURVE = 2.5;
 	
 	private static final double DEADZONE = 0.1;
+	
 	
 
 	@Override
 	public double getMoveRequest() {
-		double moveRequest = -flightStick.getY();
+		double moveRequest = logitech.getRawAxis(1);
     	moveRequest = deadzone(moveRequest, DEADZONE);
     	moveRequest = curve(moveRequest, MOVE_CURVE);
     	return moveRequest;
@@ -24,7 +25,7 @@ public class FlightStickWrapper extends DriveController {
 
 	@Override
 	public double getTurnRequest() {
-		double turnRequest = flightStick.getTwist();
+		double turnRequest = logitech.getRawAxis(2);
     	turnRequest = deadzone(turnRequest, DEADZONE);
     	turnRequest = curve(turnRequest, TURN_CURVE);
     	return turnRequest;
@@ -32,17 +33,17 @@ public class FlightStickWrapper extends DriveController {
 
 	@Override
 	public double getSpeedLimiter() {
-		return map(-flightStick.getThrottle(), -1, 1, 0, 1);
+		return 1;
 	}
 
 	@Override
 	public boolean getReverseDirection() {
-		return flightStick.getRawButtonPressed(11);
+		return logitech.getRawButtonPressed(2);
 	}
 
 	@Override
 	public boolean getKillPID() {
-		return flightStick.getRawButton(7);
+		return logitech.getRawButton(1);
 	}
-	
+
 }

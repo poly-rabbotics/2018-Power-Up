@@ -11,7 +11,8 @@ public class ControlChooser extends SendableChooser<DriveController> {
 	
 	public ControlChooser() {
 		super();
-		addDefault("Flight Stick", new FlightStickWrapper());
+		addDefault("Xbox Controller", new F310Wrapper());
+		addObject("Flight Stick", new FlightStickWrapper());
 		
 		SmartDashboard.putData(NAME, this);
 	}

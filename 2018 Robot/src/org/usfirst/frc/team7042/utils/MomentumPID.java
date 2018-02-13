@@ -227,7 +227,6 @@ public class MomentumPID implements Sendable {
 		builder.addDoubleProperty("i", this::getI, this::setI);
 		builder.addDoubleProperty("d", this::getD, this::setD);
 		builder.addDoubleProperty("f", this::getErrZone, this::setErrZone); // The smartdashboard expects a PID controller to have a p,i,d,f and doesn't work if its missing something
-		//builder.addDoubleProperty("targetzone", this::getTargetZone, this::setTargetZone);
 		builder.addDoubleProperty("setpoint", this::getSetpoint, this::setSetpoint);
 		builder.addBooleanProperty("enabled", this::isEnabled, this::setEnabled);
 	}

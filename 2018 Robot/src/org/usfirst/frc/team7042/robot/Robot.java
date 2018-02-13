@@ -102,6 +102,11 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		//System.out.format("Angle:%.2f Rate:%.2f Pitch:%.2f Roll:%.2f xV:%.2f yV:%.2f\n", RobotMap.pi.getAngle(), RobotMap.pi.getRate(), RobotMap.pi.getPitch(), RobotMap.pi.getRoll(), RobotMap.pi.getXVelocity(), RobotMap.pi.getYVelocity());
 		
-		Robot.driveSystem.driveTurnPID();
+		Robot.driveSystem.driveMoveRatePID();
+		System.out.format("Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.moveRatePID.isEnabled()), (RobotMap.leftEncoder.getRate() + RobotMap.rightEncoder.getRate()) / 2, driveSystem.moveRatePID.getSetpoint(), driveSystem.moveRatePID.get());
+		if(RobotMap.flightStick.getRawButton(12)) {
+			RobotMap.leftEncoder.reset();
+			RobotMap.rightEncoder.reset();
+		}
 	}
 }
