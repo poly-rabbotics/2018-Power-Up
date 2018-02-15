@@ -8,10 +8,10 @@ public class F310Wrapper extends DriveController {
 	
 	private Joystick logitech = RobotMap.logitech;
 	
-	private static final double MOVE_CURVE = 2.5;
-	private static final double TURN_CURVE = 2.5;
+	private static final double MOVE_CURVE = 2;
+	private static final double TURN_CURVE = 1;
 	
-	private static final double DEADZONE = 0.1;
+	private static final double DEADZONE = 0.05;
 	
 	
 

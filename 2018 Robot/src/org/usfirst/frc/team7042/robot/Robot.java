@@ -89,6 +89,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.format("DISTANCE: L:%.2f R:%.2f\n", RobotMap.leftEncoder.getDistance(), RobotMap.rightEncoder.getDistance());
+		System.out.format("ANGLE Displacement:%.2f Rate:%.2f\n",RobotMap.ahrs.getAngle(),RobotMap.ahrs.getRate());
+		System.out.format("AHRS Pitch:%2f Roll:%.2f\n", RobotMap.ahrs.getPitch(), RobotMap.ahrs.getRoll());
 		Scheduler.getInstance().run();
 	}
 
@@ -102,8 +105,12 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		//System.out.format("Angle:%.2f Rate:%.2f Pitch:%.2f Roll:%.2f xV:%.2f yV:%.2f\n", RobotMap.pi.getAngle(), RobotMap.pi.getRate(), RobotMap.pi.getPitch(), RobotMap.pi.getRoll(), RobotMap.pi.getXVelocity(), RobotMap.pi.getYVelocity());
 		
-		Robot.driveSystem.driveMoveRatePID();
-		System.out.format("Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.moveRatePID.isEnabled()), (RobotMap.leftEncoder.getRate() + RobotMap.rightEncoder.getRate()) / 2, driveSystem.moveRatePID.getSetpoint(), driveSystem.moveRatePID.get());
+		Robot.driveSystem.driveDisplacementPID();
+		System.out.format("MOVE Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.movePID.isEnabled()), (RobotMap.leftEncoder.getDistance() + RobotMap.rightEncoder.getDistance()) / 2, driveSystem.movePID.getSetpoint(), driveSystem.movePID.get());
+		System.out.format("TURN Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.turnPID.isEnabled()), RobotMap.ahrs.getAngle(), driveSystem.turnPID.getSetpoint(), driveSystem.turnPID.get());
+		System.out.format("TILT Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.pitchPID.isEnabled()), RobotMap.ahrs.getRoll(), driveSystem.pitchPID.getSetpoint(), driveSystem.pitchPID.get());
+		System.out.println("-------------------");
+
 		if(RobotMap.flightStick.getRawButton(12)) {
 			RobotMap.leftEncoder.reset();
 			RobotMap.rightEncoder.reset();

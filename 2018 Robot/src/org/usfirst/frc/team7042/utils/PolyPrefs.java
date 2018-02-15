@@ -11,6 +11,7 @@ public class PolyPrefs {
 	private static final double ENC_TICKS = 700; // Number of encoder ticks per meter of travel
 	private static final double MAX_MOVE_SPEED = 2; // Maximum velocity of the robot in meters/second
 	private static final double MAX_TURN_SPEED = 4; // Maximum angular velocity of the robot in degrees/second
+	private static final double TILT_RANGE = 2;
 	
 	
 	
@@ -44,6 +45,10 @@ public class PolyPrefs {
 	public static double getMaxTurnSpeed() {
 		checkDouble("MAX_TURN_SPEED", MAX_TURN_SPEED);
 		return prefs.getDouble("MAX_TURN_SPEED", MAX_TURN_SPEED);
+	}
+	public static double getTiltRange() {
+		checkDouble("TILT_RANGE",TILT_RANGE);
+		return prefs.getDouble("TILT_RANGE", TILT_RANGE);
 	}
 
 }

@@ -8,6 +8,7 @@ import org.usfirst.frc.team7042.commands.TeleopNoPID;
 import org.usfirst.frc.team7042.robot.RobotMap;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
 import org.usfirst.frc.team7042.utils.MomentumPID;
+import org.usfirst.frc.team7042.utils.PIDCalculator;
 import org.usfirst.frc.team7042.utils.PIDFactory;
 
 /**
@@ -24,6 +25,8 @@ public class DriveSystem extends Subsystem {
     public MomentumPID moveRatePID, turnRatePID;
     public MomentumPID pitchPID;
     
+    private PIDCalculator calc;
+    
     
     
     public DriveSystem() {
@@ -39,6 +42,9 @@ public class DriveSystem extends Subsystem {
     	turnRatePID = PIDFactory.getMoveRatePID();
     	
     	pitchPID = PIDFactory.getTiltPID();
+    	
+    	calc = new PIDCalculator(new MomentumPID[] {movePID, turnPID, moveRatePID, turnRatePID, pitchPID});
+    	calc.start();
     	
     	addChild(drive);
     	addChild(movePID);
@@ -74,22 +80,25 @@ public class DriveSystem extends Subsystem {
     	tankDrive(0,0,0);
     }
     
-    public void driveTurnPID() {
-    	if(turnPID.isEnabled())
-    		arcadeDrive(0, turnPID.get(), PolyPrefs.getAutoSpeed());
-    	else
-    		arcadeDrive(0,0,0);
-    }
-    
-    public void driveMovePID() {
-    	if(turnPID.isEnabled() && movePID.isEnabled() && pitchPID.isEnabled())
-    		arcadeDrive(movePID.get() + pitchPID.get(), turnPID.get(), PolyPrefs.getAutoSpeed());
-    	else if(turnPID.isEnabled() && movePID.isEnabled())
-    		arcadeDrive(movePID.get(), turnPID.get(), PolyPrefs.getAutoSpeed());
-    	else if(movePID.isEnabled())
-    		arcadeDrive(movePID.get(), 0, PolyPrefs.getAutoSpeed());
-    	else
-    		arcadeDrive(0,0,0);
+    public void driveDisplacementPID() {
+    	
+    	double moveRequest = 0, turnRequest = 0;
+    	if(pitchPID.isEnabled() && pitchPID.get() != 0) {
+    		arcadeDrive(pitchPID.get(), 0, 1);
+    		System.out.println("TILTING!!!!");
+    		return;
+    	}
+    	if(movePID.isEnabled()) {
+    		moveRequest = movePID.get();
+    	}
+    	if(turnPID.isEnabled()) {
+    		turnRequest = turnPID.get();
+    	}
+    	
+    	System.out.println("MR: "+moveRequest+" TR: "+turnRequest);
+    	
+    	arcadeDrive(moveRequest, turnRequest, PolyPrefs.getAutoSpeed());
+    	
     }
     
     public void driveMoveRatePID() {

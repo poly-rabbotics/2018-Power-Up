@@ -159,7 +159,14 @@ public class PIDFactory {
 
 		@Override
 		public double pidGet() {
-			return RobotMap.ahrs.getPitch();
+			double angle = RobotMap.ahrs.getRoll();
+			double tiltRange = PolyPrefs.getTiltRange();
+			if(angle > tiltRange)
+				return angle - tiltRange;
+			else if(angle < -tiltRange)
+				return angle + tiltRange;
+			else
+				return 0;
 		}
 		
 	}
