@@ -10,7 +10,7 @@ public class FlightStickWrapper extends DriveController {
 	
 	private static final double MOVE_CURVE = 2;
 	private static final double TURN_CURVE = 1;
-	
+	private static final double LIFT_SPEED = 1;
 	private static final double DEADZONE = 0.1;
 	
 
@@ -45,16 +45,26 @@ public class FlightStickWrapper extends DriveController {
 		return flightStick.getRawButton(7);
 	}
 
-	@Override
-	public double getLiftSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public boolean getMoveLift() {
 		return flightStick.getRawButtonPressed(7);
 		
+	}
+	@Override
+	
+	public double getLiftSpeed() {
+		if(flightStick.getPOV() == 0|| flightStick.getPOV() == 45 || flightStick.getPOV() == 315)
+			return LIFT_SPEED;
+		else if(flightStick.getPOV() == 180 ||flightStick.getPOV() ==  135 ||flightStick.getPOV() ==  215)
+			return -LIFT_SPEED;
+		else
+			return 0;
+	}
+	
+	@Override
+	public boolean getGrab() {
+		return flightStick.getRawButtonPressed(1);
 	}
 	
 }

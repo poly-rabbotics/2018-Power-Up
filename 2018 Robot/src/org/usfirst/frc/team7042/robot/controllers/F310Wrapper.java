@@ -49,9 +49,9 @@ public class F310Wrapper extends DriveController {
 
 	@Override
 	public double getLiftSpeed() {
-		if(logitech.getPOV() == 0)
+		if(logitech.getPOV() == 0|| logitech.getPOV() == 45 || logitech.getPOV() == 315)
 			return LIFT_SPEED;
-		else if(logitech.getPOV() == 180)
+		else if(logitech.getPOV() == 180 ||logitech.getPOV() ==  135 ||logitech.getPOV() ==  215)
 			return -LIFT_SPEED;
 		else
 			return 0;
@@ -61,6 +61,17 @@ public class F310Wrapper extends DriveController {
 	@Override
 	public boolean getMoveLift() {
 		return logitech.getRawButtonPressed(6);
+	}
+	
+	@Override
+	public boolean getGrab() {
+		double grabTrigger = logitech.getRawAxis(2);
+		boolean grab;
+		if (grabTrigger < 0.1)
+			grab = false;
+		else 
+			grab = true;
+		return grab;
 	}
 	
 	
