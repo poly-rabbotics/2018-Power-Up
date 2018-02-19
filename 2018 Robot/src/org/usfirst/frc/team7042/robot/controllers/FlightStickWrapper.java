@@ -50,5 +50,11 @@ public class FlightStickWrapper extends DriveController {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public boolean getMoveLift() {
+		return flightStick.getRawButtonPressed(7);
+		
+	}
 	
 }

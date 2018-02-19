@@ -10,6 +10,7 @@ public class F310Wrapper extends DriveController {
 	
 	private static final double MOVE_CURVE = 2;
 	private static final double TURN_CURVE = 1;
+	private static final double LIFT_SPEED = 1;
 	
 	private static final double DEADZONE = 0.05;
 	
@@ -48,7 +49,18 @@ public class F310Wrapper extends DriveController {
 
 	@Override
 	public double getLiftSpeed() {
-		return logitech.getRawAxis(5);
+		if(logitech.getPOV() == 0)
+			return LIFT_SPEED;
+		else if(logitech.getPOV() == 180)
+			return -LIFT_SPEED;
+		else
+			return 0;
+		 
+	}
+
+	@Override
+	public boolean getMoveLift() {
+		return logitech.getRawButtonPressed(6);
 	}
 	
 	

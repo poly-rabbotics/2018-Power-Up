@@ -7,7 +7,8 @@
 
 package org.usfirst.frc.team7042.robot;
 
-import org.usfirst.frc.team7042.commands.*;
+import org.usfirst.frc.team7042.robot.commands.MoveLift;
+import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
 import org.usfirst.frc.team7042.triggers.*;
 
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -46,7 +47,9 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 	
 	Trigger killPID = new KillPID();
+	Trigger moveLift = new MoveLiftTrigger();
 	public OI() {
 		killPID.whenActive(new TeleopNoPID());
+		moveLift.whenActive(new MoveLift());
 	}
 }

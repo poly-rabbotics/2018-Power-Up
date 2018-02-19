@@ -1,4 +1,4 @@
-package org.usfirst.frc.team7042.commands;
+package org.usfirst.frc.team7042.robot.commands;
 
 import org.usfirst.frc.team7042.robot.Robot;
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;

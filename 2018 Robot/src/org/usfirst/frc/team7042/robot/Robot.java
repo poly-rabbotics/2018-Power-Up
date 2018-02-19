@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import org.usfirst.frc.team7042.commands.TeleopNoPID;
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
+import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
 import org.usfirst.frc.team7042.robot.subsystems.*;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
 
@@ -26,6 +26,7 @@ import org.usfirst.frc.team7042.utils.PolyPrefs;
 public class Robot extends TimedRobot {
 	public static final DriveSystem driveSystem = new DriveSystem();
 	public static final Lift lift = new Lift();
+	public static final LiftSlider slider = new LiftSlider();
 	public static OI m_oi;
 	public static ControlChooser controlChooser = new ControlChooser();
 

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lift extends Subsystem {
 	
-	private DoubleSolenoid solenoid = RobotMap.liftSolenoid;
+
 	private VictorSP motor = RobotMap.liftMotor;
 
     /**
@@ -19,34 +19,7 @@ public class Lift extends Subsystem {
     public Lift() {
     }
 
-    /** 
-     * Extends the solenoid
-     */
-    public void open() {
-    	solenoid.set(DoubleSolenoid.Value.kForward);
-    }
 
-    /**
-     * Retracts the solenoid
-     */
-    public void close() {
-    	solenoid.set(DoubleSolenoid.Value.kReverse);
-    }
-
-    /**
-     * Gets if the lift is retracted
-     */
-    public boolean getIn() {
-    	return solenoid.get() == DoubleSolenoid.Value.kReverse;
-    }
-
-    /**
-     * Gets if the lift is extended
-     */
-    public boolean getOut() {
-    	return solenoid.get() == DoubleSolenoid.Value.kForward;
-    }
-    
     public void setSpeedNoLimit(double speed) {
     	motor.set(speed);
     }
