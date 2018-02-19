@@ -3,6 +3,7 @@ package org.usfirst.frc.team7042.robot.subsystems;
 import org.usfirst.frc.team7042.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 //import edu.wpi.first.wpilibj.Solenoid;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lift extends Subsystem {
 	
 	private DoubleSolenoid solenoid = RobotMap.liftSolenoid;
+	private VictorSP motor = RobotMap.liftMotor;
 
     /**
      * For a double solenoid system
@@ -43,6 +45,10 @@ public class Lift extends Subsystem {
      */
     public boolean getOut() {
     	return solenoid.get() == DoubleSolenoid.Value.kForward;
+    }
+    
+    public void setSpeedNoLimit(double speed) {
+    	motor.set(speed);
     }
 
 	@Override

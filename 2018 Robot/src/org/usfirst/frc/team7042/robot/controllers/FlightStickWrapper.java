@@ -44,5 +44,11 @@ public class FlightStickWrapper extends DriveController {
 	public boolean getKillPID() {
 		return flightStick.getRawButton(7);
 	}
+
+	@Override
+	public double getLiftSpeed() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

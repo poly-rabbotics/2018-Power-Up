@@ -8,6 +8,8 @@ public abstract class DriveController {
 	abstract public boolean getReverseDirection();
 	abstract public boolean getKillPID();
 	
+	abstract public double getLiftSpeed();
+	
 	public double map(double val, double inmin, double inmax, double outmin, double outmax) {
     	return (((val - inmin) / (inmax - inmin)) * (outmax - outmin)) + outmin;
     }

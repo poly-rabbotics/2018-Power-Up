@@ -25,7 +25,7 @@ public class F310Wrapper extends DriveController {
 
 	@Override
 	public double getTurnRequest() {
-		double turnRequest = logitech.getRawAxis(2);
+		double turnRequest = logitech.getRawAxis(4);
     	turnRequest = deadzone(turnRequest, DEADZONE);
     	turnRequest = curve(turnRequest, TURN_CURVE);
     	return turnRequest;
@@ -45,5 +45,12 @@ public class F310Wrapper extends DriveController {
 	public boolean getKillPID() {
 		return logitech.getRawButton(1);
 	}
+
+	@Override
+	public double getLiftSpeed() {
+		return logitech.getRawAxis(5);
+	}
+	
+	
 
 }
