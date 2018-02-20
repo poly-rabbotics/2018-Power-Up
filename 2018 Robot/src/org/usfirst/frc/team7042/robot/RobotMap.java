@@ -7,16 +7,16 @@
 
 package org.usfirst.frc.team7042.robot;
 
+//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
-
 
 import edu.wpi.first.wpilibj.Compressor;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.VictorSP;
 
 /**
@@ -52,9 +52,11 @@ public class RobotMap {
     
     public static DoubleSolenoid liftSolenoid = new DoubleSolenoid(0, 1);
     
-    public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(?????);//what ports?
+    public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(2,3);//what ports?
 
-   
+    public static Talon armWheels1 = new Talon(5);
+    public static Talon armWheels2 = new Talon(6);
+    
     public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
     
     public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
