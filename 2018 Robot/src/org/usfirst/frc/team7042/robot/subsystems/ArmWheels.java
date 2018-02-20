@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ArmWheels extends Subsystem {
 
-	private TalonSRX wheel1;
-	private TalonSRX wheel2;
+	private TalonSRX wheel1 = RobotMap.armWheels1;
+	private TalonSRX wheel2 = RobotMap.armWheels2;
     
     
     public ArmWheels() {
@@ -25,8 +25,12 @@ public class ArmWheels extends Subsystem {
 		
 		
 	}
+    public void setSpeed(double speed) {
+    	wheel1.set(speed);
+    	wheel2.set(speed);
+    }
     
-    //
+    
     public void intake() {
     	
     }

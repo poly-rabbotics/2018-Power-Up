@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
 	public static final LiftSlider slider = new LiftSlider();
 	public static OI m_oi;
 	public static ControlChooser controlChooser = new ControlChooser();
+	public static final ArmWheels intake = new ArmWheels();
 
 
 	/**

@@ -60,7 +60,7 @@ public class F310Wrapper extends DriveController {
 
 	@Override
 	public boolean getMoveLift() {
-		return logitech.getRawButtonPressed(6);
+		return logitech.getRawButtonPressed(4);
 	}
 	
 	@Override
@@ -74,11 +74,17 @@ public class F310Wrapper extends DriveController {
 		return grab;
 	}
 	
-	public boolean getReverseArmWheels () {
-		if (logitech.getRawAxis(2) < 0.1)
-			return false;
-		else
-			return false;
+	
+
+	@Override
+	public boolean getIntake() {
+		return logitech.getRawButtonPressed(6);
+
+	}
+
+	@Override
+	public boolean getEject() {
+		return logitech.getRawButtonPressed(5);
 	}
 
 }

@@ -37,7 +37,7 @@ public class FlightStickWrapper extends DriveController {
 
 	@Override
 	public boolean getReverseDirection() {
-		return flightStick.getRawButtonPressed(11);
+		return flightStick.getRawButtonPressed(2);
 	}
 
 	@Override
@@ -66,10 +66,17 @@ public class FlightStickWrapper extends DriveController {
 	public boolean getGrab() {
 		return flightStick.getRawButton(1);
 	}
-	
+
 	@Override
-	public boolean getReverseArmWheels() {
-		return flightStick.getRawButtonPressed(1);
+	public boolean getIntake() {
+		return flightStick.getRawButtonPressed(5);
 	}
+
+	@Override
+	public boolean getEject() {
+		return flightStick.getRawButtonPressed(6);
+
+	}
+	
 	
 }

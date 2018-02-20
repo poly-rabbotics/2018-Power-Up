@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
@@ -56,7 +57,10 @@ public class RobotMap {
 
     public static TalonSRX armWheels1 = new TalonSRX(5);
     public static TalonSRX armWheels2 = new TalonSRX(6);
-    
+    public static int armWheel1pdp = 0;
+    public static int armWheel2pdp = 14;
+
+    public static PowerDistributionPanel pdp = new PowerDistributionPanel();
     
     public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
     
