@@ -10,11 +10,14 @@ package org.usfirst.frc.team7042.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
 import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
 import org.usfirst.frc.team7042.robot.subsystems.*;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -92,10 +95,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		System.out.format("DISTANCE: L:%.2f R:%.2f\n", RobotMap.leftEncoder.getDistance(), RobotMap.rightEncoder.getDistance());
-		System.out.format("ANGLE Displacement:%.2f Rate:%.2f\n",RobotMap.ahrs.getAngle(),RobotMap.ahrs.getRate());
-		System.out.format("AHRS Pitch:%2f Roll:%.2f\n", RobotMap.ahrs.getPitch(), RobotMap.ahrs.getRoll());
+//		System.out.format("DISTANCE: L:%.2f R:%.2f\n", RobotMap.leftEncoder.getDistance(), RobotMap.rightEncoder.getDistance());
+//		System.out.format("ANGLE Displacement:%.2f Rate:%.2f\n",RobotMap.ahrs.getAngle(),RobotMap.ahrs.getRate());
+//		System.out.format("AHRS Pitch:%2f Roll:%.2f\n", RobotMap.ahrs.getPitch(), RobotMap.ahrs.getRoll());
 		Scheduler.getInstance().run();
+		SmartDashboard.putData(RobotMap.pdp);
+		
+//		if(RobotMap.flightStick.getRawButton(11))
+//			RobotMap.armWheels1.set(ControlMode.PercentOutput, 1);
 	}
 
 	@Override

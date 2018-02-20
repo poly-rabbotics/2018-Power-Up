@@ -2,6 +2,7 @@ package org.usfirst.frc.team7042.robot.subsystems;
 
 import org.usfirst.frc.team7042.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -19,15 +20,15 @@ public class ArmWheels extends Subsystem {
     public ArmWheels() {
 		super();
 		
-		RobotMap.armWheels1.setInverted(true);
+		//RobotMap.armWheels1.setInverted(true);
 		
 		
 		
 		
 	}
     public void setSpeed(double speed) {
-    	wheel1.set(speed);
-    	wheel2.set(speed);
+    	wheel1.set(ControlMode.PercentOutput,speed);
+    	wheel2.set(ControlMode.PercentOutput,speed);
     }
     
     
