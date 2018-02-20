@@ -68,7 +68,7 @@ public class FlightStickWrapper extends DriveController {
 	}
 	
 	@Override
-	public boolean armWheels() {
+	public boolean getReverseArmWheels() {
 		return flightStick.getRawButtonPressed(1);
 	}
 	

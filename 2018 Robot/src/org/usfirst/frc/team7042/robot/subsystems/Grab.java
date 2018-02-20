@@ -13,6 +13,7 @@ public class Grab extends Subsystem {
     // here. Call these from Commands.
 
 	public DoubleSolenoid grabber = RobotMap.grabSolenoid;
+	
 	public boolean getOut() {
 		return grabber.get() == DoubleSolenoid.Value.kForward;
 	}

@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team7042.robot;
 
-//import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -54,8 +54,9 @@ public class RobotMap {
     
     public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(2,3);//what ports?
 
-    public static Talon armWheels1 = new Talon(5);
-    public static Talon armWheels2 = new Talon(6);
+    public static TalonSRX armWheels1 = new TalonSRX(5);
+    public static TalonSRX armWheels2 = new TalonSRX(6);
+    
     
     public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
     

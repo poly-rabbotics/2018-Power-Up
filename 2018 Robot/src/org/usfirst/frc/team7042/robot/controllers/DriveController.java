@@ -14,7 +14,7 @@ public abstract class DriveController {
 	
 	abstract public boolean getGrab();
 	
-	abstract public double getArmWheels();
+	abstract public boolean getReverseArmWheels();
 	
 	public double map(double val, double inmin, double inmax, double outmin, double outmax) {
     	return (((val - inmin) / (inmax - inmin)) * (outmax - outmin)) + outmin;

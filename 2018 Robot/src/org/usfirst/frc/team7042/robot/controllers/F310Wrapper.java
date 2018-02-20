@@ -74,9 +74,11 @@ public class F310Wrapper extends DriveController {
 		return grab;
 	}
 	
-	public double getArmWheels () {
+	public boolean getReverseArmWheels () {
 		if (logitech.getRawAxis(2) < 0.1)
-			return 
+			return false;
+		else
+			return false;
 	}
 
 }
