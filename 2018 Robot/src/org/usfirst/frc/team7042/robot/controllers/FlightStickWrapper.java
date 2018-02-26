@@ -16,7 +16,7 @@ public class FlightStickWrapper extends DriveController {
 
 	@Override
 	public double getMoveRequest() {
-		double moveRequest = -flightStick.getY();
+		double moveRequest = flightStick.getY();
     	moveRequest = deadzone(moveRequest, DEADZONE);
     	moveRequest = curve(moveRequest, MOVE_CURVE);
     	return moveRequest;

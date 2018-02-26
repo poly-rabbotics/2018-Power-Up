@@ -53,12 +53,16 @@ public class RobotMap {
     
     public static DoubleSolenoid liftSolenoid = new DoubleSolenoid(0, 1);
     
-    public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(2,3);//what ports?
+    public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(2,3);// what ports?
 
-    public static TalonSRX armWheels1 = new TalonSRX(0);
-    public static TalonSRX armWheels2 = new TalonSRX(1);
+    public static TalonSRX armWheels1 = new TalonSRX(4); // maybe not using these? pneumatic arms?
+    public static TalonSRX armWheels2 = new TalonSRX(5);
     public static int armWheel1pdp = 0;
     public static int armWheel2pdp = 1;
+    
+    public static TalonSRX lift1 = new TalonSRX(0);
+    public static TalonSRX lift2 = new TalonSRX(1);
+
 
     public static PowerDistributionPanel pdp = new PowerDistributionPanel();
     

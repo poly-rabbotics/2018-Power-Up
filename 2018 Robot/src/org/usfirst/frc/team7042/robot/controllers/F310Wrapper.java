@@ -65,13 +65,7 @@ public class F310Wrapper extends DriveController {
 	
 	@Override
 	public boolean getGrab() {
-		double grabTrigger = logitech.getRawAxis(2);
-		boolean grab;
-		if (grabTrigger < 0.1)
-			grab = false;
-		else 
-			grab = true;
-		return grab;
+		return logitech.getRawButtonPressed(6);
 	}
 	
 	
