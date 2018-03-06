@@ -27,7 +27,7 @@ public class FlightStickWrapper extends DriveController {
 		double turnRequest = flightStick.getTwist();
     	turnRequest = deadzone(turnRequest, DEADZONE);
     	turnRequest = curve(turnRequest, TURN_CURVE);
-    	return turnRequest; 
+    	return turnRequest;
 	}
 
 	@Override
