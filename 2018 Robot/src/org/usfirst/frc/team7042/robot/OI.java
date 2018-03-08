@@ -49,11 +49,13 @@ public class OI {
 	Trigger moveLift = new MoveLiftTrigger();
 	Trigger intake = new IntakeTrigger();
 	Trigger eject = new EjectTrigger();
+	Trigger grab = new GrabTrigger();
 	public OI() {
 		killPID.whenActive(new TeleopNoPID());
 		moveLift.whenActive(new MoveLift());
 		intake.whenActive(new Intake());
 		eject.whenActive(new Eject());
+		grab.whenActive(new Grabber());
 	}
 	
 }
