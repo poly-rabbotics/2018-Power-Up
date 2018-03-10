@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
 import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
+import org.usfirst.frc.team7042.robot.commands.autonomous.MoveDistance;
+import org.usfirst.frc.team7042.robot.commands.autonomous.TurnDegrees;
 import org.usfirst.frc.team7042.robot.subsystems.*;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
 
@@ -75,6 +77,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		System.out.println(DriverStation.getInstance().getGameSpecificMessage());
+		
+		//option 3R
+		TurnDegrees turn = new TurnDegrees(-90);
+		MoveDistance move = new MoveDistance(0.6096);
+		TurnDegrees turn1 = new TurnDegrees(90);
+		MoveDistance move1 = new MoveDistance(2.7867);
+		
+
 	}
 
 	/**

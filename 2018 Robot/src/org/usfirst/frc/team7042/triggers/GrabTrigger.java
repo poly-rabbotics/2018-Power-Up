@@ -10,6 +10,6 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 public class GrabTrigger extends Trigger {
 
     public boolean get() {
-        return Robot.controlChooser.getSelected().getMoveLift();
+        return Robot.controlChooser.getSelected().getGrab();
     }
 }
