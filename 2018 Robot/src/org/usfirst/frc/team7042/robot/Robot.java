@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team7042.robot.choosers.ArmChooser;
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
 import org.usfirst.frc.team7042.robot.choosers.StartChooser;
 import org.usfirst.frc.team7042.robot.choosers.Target;
@@ -42,10 +41,8 @@ public class Robot extends TimedRobot {
 	public static final LiftSlider slider = new LiftSlider();
 	public static OI m_oi;
 	public static ControlChooser controlChooser = new ControlChooser();
-	public static ArmChooser armsChooser = new ArmChooser();
 	public static TargetChooser target = new TargetChooser();
 	public static StartChooser start = new StartChooser();
-	public static final ArmWheels intake = new ArmWheels();
 	public static final Grab grabber = new Grab();
 
 	/**
@@ -152,15 +149,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
-		switch(armsChooser.getSelected()) {
-		case WHEELS:
-			m_oi.registerWheels();
-			break;
-		case PISTON:
-		default:
-			m_oi.registerPiston();
-			break;
-		}
 		new TeleopNoPID().start();
 	}
 

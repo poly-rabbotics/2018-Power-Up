@@ -67,16 +67,5 @@ public class FlightStickWrapper extends DriveController {
 		return flightStick.getRawButton(1);
 	}
 
-	@Override
-	public boolean getIntake() {
-		return flightStick.getRawButtonPressed(1);
-	}
-
-	@Override
-	public boolean getEject() {
-		return flightStick.getRawButtonPressed(3);
-
-	}
-	
 	
 }

@@ -1,22 +1,51 @@
 package org.usfirst.frc.team7042.robot.controllers;
 
 public abstract class DriveController {
+	
+	/**
+	 * return requested robot movement
+	 * @return
+	 */
 	abstract public double getMoveRequest();
+	/**
+	 * get requested robot turn
+	 * @return
+	 */
 	abstract public double getTurnRequest();
+	/**
+	 * get requested speed limit
+	 * @return
+	 */
 	abstract public double getSpeedLimiter();
 	
+	/**
+	 * get whether to switch front and back
+	 * @return
+	 */
 	abstract public boolean getReverseDirection();
+	/**
+	 * emergency "please drive now"
+	 * @return
+	 */
 	abstract public boolean getKillPID();
 	
+	/**
+	 * get requested move speed of lift
+	 * @return
+	 */
 	abstract public double getLiftSpeed();
 	
+	/**
+	 * get to move lift forward/backwards
+	 * @return
+	 */
 	abstract public boolean getMoveLift();
 	
+	/**
+	 * get piston grab
+	 * @return
+	 */
 	abstract public boolean getGrab();
-	
-	abstract public boolean getIntake();
-	abstract public boolean getEject();
-
 	
 	public double map(double val, double inmin, double inmax, double outmin, double outmax) {
     	return (((val - inmin) / (inmax - inmin)) * (outmax - outmin)) + outmin;

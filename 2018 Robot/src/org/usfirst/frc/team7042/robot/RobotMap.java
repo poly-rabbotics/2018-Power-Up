@@ -27,15 +27,6 @@ import edu.wpi.first.wpilibj.VictorSP;
  * floating around.
  */
 public class RobotMap {
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
 	
 	public static Spark frontLeft = new Spark(0);
 	public static Spark backLeft = new Spark(1);
@@ -55,22 +46,12 @@ public class RobotMap {
     
     public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(2,3);// what ports?
 
-    public static TalonSRX armWheels1 = new TalonSRX(4); // maybe not using these? pneumatic arms?
-    public static TalonSRX armWheels2 = new TalonSRX(5);
-    public static int armWheel1pdp = 0;
-    public static int armWheel2pdp = 1;
-    
     public static TalonSRX lift1 = new TalonSRX(0);
     public static TalonSRX lift2 = new TalonSRX(1);
 
 
     public static PowerDistributionPanel pdp = new PowerDistributionPanel();
     
-    public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
-    
     public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
     
-    public static int LEFT_INTAKE_PDP = 0;
-    public static int RIGHT_INTAKE_PDP = 1;
-
 }

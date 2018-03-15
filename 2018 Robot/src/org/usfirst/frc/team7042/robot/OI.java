@@ -48,21 +48,12 @@ public class OI {
 	
 	Trigger killPID = new KillPID();
 	Trigger moveLift = new MoveLiftTrigger();
-	Trigger intake = new IntakeTrigger();
-	Trigger eject = new EjectTrigger();
 	Trigger grab = new GrabTrigger();
+	
 	
 	public OI() {
 		killPID.whenActive(new TeleopNoPID());
 		moveLift.whenActive(new MoveLift());
-	}
-	
-	public void registerWheels() {
-		intake.whenActive(new GrabAndHold());
-		eject.whenActive(new Eject());
-	}
-	
-	public void registerPiston() {
 		grab.whenActive(new PistonRelease());
 		grab.whenInactive(new PistonGrab());
 	}

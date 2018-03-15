@@ -70,15 +70,4 @@ public class F310Wrapper extends DriveController {
 	
 	
 
-	@Override
-	public boolean getIntake() {
-		return logitech.getRawButtonPressed(3);
-
-	}
-
-	@Override
-	public boolean getEject() {
-		return logitech.getRawButtonPressed(4);
-	}
-
 }

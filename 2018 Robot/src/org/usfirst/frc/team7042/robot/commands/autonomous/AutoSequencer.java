@@ -61,9 +61,10 @@ public class AutoSequencer extends CommandGroup {
             case SWITCH:
             	switch(side) {
             	case LEFT:
-//            		addSequential(new TurnDegrees());
-//            		addSequential(new MoveDistance());
-//            		addSequential(new TurnDegrees());
+            		addSequential(new TurnDegrees(-90));
+            		addSequential(new MoveDistance(1.9812));
+            		addSequential(new TurnDegrees(90));
+            		addSequential(new MoveDistance(2.5908));
             		break;
             	case RIGHT:
             		addSequential(new TurnDegrees(90));
