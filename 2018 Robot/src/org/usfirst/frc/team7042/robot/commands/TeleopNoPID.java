@@ -31,7 +31,6 @@ public class TeleopNoPID extends Command {
     	if(controller.getReverseDirection())
     		reversed = !reversed;
     	drive.arcadeDrive((reversed)?-controller.getMoveRequest():controller.getMoveRequest(), controller.getTurnRequest(), controller.getSpeedLimiter());
-    	Robot.lift.setSpeedNoLimit(controller.getLiftSpeed());
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +41,6 @@ public class TeleopNoPID extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	drive.stop();
-    	Robot.lift.setSpeedNoLimit(0);
     }
 
     // Called when another command which requires one or more of the same

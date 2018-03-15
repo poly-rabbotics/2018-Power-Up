@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
 import org.usfirst.frc.team7042.robot.choosers.StartChooser;
@@ -21,14 +20,11 @@ import org.usfirst.frc.team7042.robot.choosers.TargetChooser;
 import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
 import org.usfirst.frc.team7042.robot.commands.autonomous.AutoSequencer;
 import org.usfirst.frc.team7042.robot.commands.autonomous.FailsafeAuto;
-import org.usfirst.frc.team7042.robot.commands.autonomous.MoveDistance;
 import org.usfirst.frc.team7042.robot.commands.autonomous.TargetPosition;
-import org.usfirst.frc.team7042.robot.commands.autonomous.TurnDegrees;
-import org.usfirst.frc.team7042.robot.commands.lift.ZeroLift;
+import org.usfirst.frc.team7042.robot.commands.lift.ZeroThenTeleop;
 import org.usfirst.frc.team7042.robot.subsystems.*;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -148,7 +144,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
-		new ZeroLift().start();
+		new ZeroThenTeleop().start();
 		new TeleopNoPID().start();
 	}
 

@@ -9,6 +9,7 @@ package org.usfirst.frc.team7042.robot;
 
 import org.usfirst.frc.team7042.robot.commands.*;
 import org.usfirst.frc.team7042.robot.commands.intake.*;
+import org.usfirst.frc.team7042.robot.commands.lift.TeleopLiftNoPID;
 import org.usfirst.frc.team7042.triggers.*;
 
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -53,9 +54,12 @@ public class OI {
 	
 	public OI() {
 		killPID.whenActive(new TeleopNoPID());
+		killPID.whenActive(new TeleopLiftNoPID());
+		
 		moveLift.whenActive(new MoveLift());
 		grab.whenActive(new PistonRelease());
 		grab.whenInactive(new PistonGrab());
+		
 	}
 	
 }
