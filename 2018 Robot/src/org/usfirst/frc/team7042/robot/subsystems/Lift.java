@@ -53,9 +53,12 @@ public class Lift extends Subsystem {
     public void drivePID() {
     	setSpeed(pid.get());
     }
+    
+    public void zeroLift() {
+    	encoder.reset();
+    }
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		
 	}
 }

@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team7042.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,6 +24,7 @@ import org.usfirst.frc.team7042.robot.commands.autonomous.FailsafeAuto;
 import org.usfirst.frc.team7042.robot.commands.autonomous.MoveDistance;
 import org.usfirst.frc.team7042.robot.commands.autonomous.TargetPosition;
 import org.usfirst.frc.team7042.robot.commands.autonomous.TurnDegrees;
+import org.usfirst.frc.team7042.robot.commands.lift.ZeroLift;
 import org.usfirst.frc.team7042.robot.subsystems.*;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
 
@@ -55,6 +57,9 @@ public class Robot extends TimedRobot {
 
 		RobotMap.leftEncoder.setDistancePerPulse(1/PolyPrefs.getEncTicks());
 		RobotMap.rightEncoder.setDistancePerPulse(1/PolyPrefs.getEncTicks());
+		
+		CameraServer.getInstance().startAutomaticCapture();
+		
 	}
 
 	/**
@@ -87,12 +92,6 @@ public class Robot extends TimedRobot {
 		System.out.println(DriverStation.getInstance().getGameSpecificMessage());
 		
 		new FailsafeAuto().start();
-		
-		//option 3R
-		TurnDegrees turn = new TurnDegrees(-90);
-		MoveDistance move = new MoveDistance(0.6096);
-		TurnDegrees turn1 = new TurnDegrees(90);
-		MoveDistance move1 = new MoveDistance(2.7867);
 		
 		String fieldPos = DriverStation.getInstance().getGameSpecificMessage();
 		TargetPosition switchPos, scalePos;
@@ -149,6 +148,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopInit() {
 		Scheduler.getInstance().removeAll();
+		new ZeroLift().start();
 		new TeleopNoPID().start();
 	}
 

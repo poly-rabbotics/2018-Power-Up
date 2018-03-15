@@ -2,6 +2,7 @@ package org.usfirst.frc.team7042.robot.commands.autonomous;
 
 import org.usfirst.frc.team7042.robot.choosers.StartPos;
 import org.usfirst.frc.team7042.robot.choosers.Target;
+import org.usfirst.frc.team7042.robot.commands.lift.ZeroLift;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,6 +12,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoSequencer extends CommandGroup {
 
     public AutoSequencer(Target target, TargetPosition side, StartPos start) {
+    	addSequential(new ZeroLift());
+    	
     	switch(start) {
     	case LEFT: // start pos
     		switch(target) {
