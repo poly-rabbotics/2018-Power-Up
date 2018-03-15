@@ -18,6 +18,7 @@ public class PIDFactory {
 	private static final String MOVE_FILE = "movePID.properties";
 	private static final String TURN_FILE = "turnPID.properties";
 	private static final String TILT_FILE = "tiltPID.properties";
+	private static final String LIFT_FILE = "liftPID.properties";
 	
 	private static final String DEFAULT_P = "0";
 	private static final String DEFAULT_I = "0";
@@ -261,6 +262,38 @@ public class PIDFactory {
 	}
 	public static void saveTiltPID(MomentumPID pid) {
 		savePID(pid, BASE + TILT_FILE);
+	}
+	public static MomentumPID getLiftPID() {
+		MomentumPID ret;
+		String path = BASE + LIFT_FILE;
+		PIDSource source = new AHRSWrapper();
+		source.setPIDSourceType(PIDSourceType.kDisplacement);
+		if(checkFile(path)) {
+			Properties props = openFile(path);
+			double p = Double.parseDouble(props.getProperty("P", DEFAULT_P));
+			double i = Double.parseDouble(props.getProperty("I", DEFAULT_I));
+			double d = Double.parseDouble(props.getProperty("D", DEFAULT_D));
+			double errZone = Double.parseDouble(props.getProperty("Error Zone", DEFAULT_ERR_ZONE));
+			double targetZone = Double.parseDouble(props.getProperty("Target Zone", DEFAULT_TARGET_ZONE));
+			double targetTime = Double.parseDouble(props.getProperty("Target Time", DEFAULT_TARGET_TIME));
+			ret = new MomentumPID("LiftPID",p,i,d,errZone,targetZone,source, null);
+			ret.setTargetTime(targetTime);
+		} else {
+			double p = Double.parseDouble(DEFAULT_P);
+			double i = Double.parseDouble(DEFAULT_I);
+			double d = Double.parseDouble(DEFAULT_D);
+			double errZone = Double.parseDouble(DEFAULT_ERR_ZONE);
+			double targetZone = Double.parseDouble(DEFAULT_TARGET_ZONE);
+			double targetTime = Double.parseDouble(DEFAULT_TARGET_TIME);
+			ret = new MomentumPID("LiftPID",p,i,d,errZone,targetZone,source, null);
+			ret.setTargetTime(targetTime);
+		}
+		ret.setListener(()->saveLiftPID(ret));
+		return ret;
+	}
+	
+	public static void saveLiftPID(MomentumPID pid) {
+		savePID(pid, BASE+LIFT_FILE);
 	}
 
 }

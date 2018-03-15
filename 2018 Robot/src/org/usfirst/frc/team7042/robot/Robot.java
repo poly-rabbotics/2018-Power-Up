@@ -157,6 +157,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.format("Ls:%.2f, LC:%s\n", RobotMap.lift1.get(), RobotMap.liftEncoder.get());
 		Scheduler.getInstance().run();
 	}
 
@@ -170,7 +171,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 		//System.out.format("Angle:%.2f Rate:%.2f Pitch:%.2f Roll:%.2f xV:%.2f yV:%.2f\n", RobotMap.pi.getAngle(), RobotMap.pi.getRate(), RobotMap.pi.getPitch(), RobotMap.pi.getRoll(), RobotMap.pi.getXVelocity(), RobotMap.pi.getYVelocity());
 		
-		Robot.driveSystem.driveDisplacementPID();
+		/*Robot.driveSystem.driveDisplacementPID();
 		System.out.format("MOVE Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.movePID.isEnabled()), (RobotMap.leftEncoder.getDistance() + RobotMap.rightEncoder.getDistance()) / 2, driveSystem.movePID.getSetpoint(), driveSystem.movePID.get());
 		System.out.format("TURN Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.turnPID.isEnabled()), RobotMap.ahrs.getAngle(), driveSystem.turnPID.getSetpoint(), driveSystem.turnPID.get());
 		System.out.format("TILT Enabled:%s Current:%.2f Setpoint:%.2f Output:%.2f\n", Boolean.toString(driveSystem.pitchPID.isEnabled()), RobotMap.ahrs.getRoll(), driveSystem.pitchPID.getSetpoint(), driveSystem.pitchPID.get());
@@ -179,6 +180,8 @@ public class Robot extends TimedRobot {
 		if(RobotMap.flightStick.getRawButton(12)) {
 			RobotMap.leftEncoder.reset();
 			RobotMap.rightEncoder.reset();
-		}
+		}*/
+		Robot.lift.drivePID();
+		System.out.format("LIFT Enabled:%b Current:%.2f Setpoint:%.2f Output:%.2f\n", lift.pid.isEnabled(), RobotMap.liftEncoder.getDistance(), lift.pid.getSetpoint(), lift.pid.get());
 	}
 }

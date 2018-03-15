@@ -38,6 +38,7 @@ public class RobotMap {
 	
 	public static Encoder leftEncoder = new Encoder(6,7);
 	public static Encoder rightEncoder = new Encoder(8,9);
+	public static Encoder liftEncoder = new Encoder(4,5);
 	
 	public static Compressor comp = new Compressor();
 	
@@ -46,8 +47,10 @@ public class RobotMap {
     
     public static DoubleSolenoid grabSolenoid = new DoubleSolenoid(2,3);// what ports?
 
-    public static TalonSRX lift1 = new TalonSRX(0);
-    public static TalonSRX lift2 = new TalonSRX(1);
+    public static VictorSP lift1 = new VictorSP(4);
+    //public static TalonSRX lift2 = new TalonSRX(1);
+    public static final int LIFT_1_PDP = 0;
+    public static final int LIFT_2_PDP = 1;
 
 
     public static PowerDistributionPanel pdp = new PowerDistributionPanel();
