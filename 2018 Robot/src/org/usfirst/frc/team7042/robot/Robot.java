@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
 import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
+import org.usfirst.frc.team7042.robot.commands.autonomous.FailsafeAuto;
 import org.usfirst.frc.team7042.robot.commands.autonomous.MoveDistance;
 import org.usfirst.frc.team7042.robot.commands.autonomous.TurnDegrees;
 import org.usfirst.frc.team7042.robot.subsystems.*;
@@ -78,11 +79,15 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		System.out.println(DriverStation.getInstance().getGameSpecificMessage());
 		
+		new FailsafeAuto().start();
+		
 		//option 3R
 		TurnDegrees turn = new TurnDegrees(-90);
 		MoveDistance move = new MoveDistance(0.6096);
 		TurnDegrees turn1 = new TurnDegrees(90);
 		MoveDistance move1 = new MoveDistance(2.7867);
+		
+		
 		
 
 	}
@@ -92,12 +97,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
  	}
 
 	@Override
 	public void teleopInit() {
-		TeleopNoPID teleopNoPID = new TeleopNoPID();
-		teleopNoPID.start();
+		Scheduler.getInstance().removeAll();
+		new TeleopNoPID().start();
 	}
 
 	/**
@@ -105,14 +111,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-//		System.out.format("DISTANCE: L:%.2f R:%.2f\n", RobotMap.leftEncoder.getDistance(), RobotMap.rightEncoder.getDistance());
-//		System.out.format("ANGLE Displacement:%.2f Rate:%.2f\n",RobotMap.ahrs.getAngle(),RobotMap.ahrs.getRate());
-//		System.out.format("AHRS Pitch:%2f Roll:%.2f\n", RobotMap.ahrs.getPitch(), RobotMap.ahrs.getRoll());
 		Scheduler.getInstance().run();
 		SmartDashboard.putData(RobotMap.pdp);
-		
-//		if(RobotMap.flightStick.getRawButton(11))
-//			RobotMap.armWheels1.set(ControlMode.PercentOutput, 1);
 	}
 
 	@Override

@@ -69,5 +69,8 @@ public class RobotMap {
     public static VictorSP liftMotor = new VictorSP(4); // Not on the robot yet
     
     public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
+    
+    public static int LEFT_INTAKE_PDP = 0;
+    public static int RIGHT_INTAKE_PDP = 1;
 
 }

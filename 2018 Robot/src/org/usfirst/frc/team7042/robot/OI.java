@@ -8,6 +8,7 @@
 package org.usfirst.frc.team7042.robot;
 
 import org.usfirst.frc.team7042.robot.commands.*;
+import org.usfirst.frc.team7042.robot.commands.intake.GrabAndHold;
 import org.usfirst.frc.team7042.triggers.*;
 
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -50,12 +51,12 @@ public class OI {
 	Trigger intake = new IntakeTrigger();
 	Trigger eject = new EjectTrigger();
 	Trigger grab = new GrabTrigger();
+	
 	public OI() {
 		killPID.whenActive(new TeleopNoPID());
 		moveLift.whenActive(new MoveLift());
-		intake.whenActive(new Intake());
+		intake.whenActive(new GrabAndHold());
 		eject.whenActive(new Eject());
-		grab.whenActive(new Grabber());
 	}
 	
 }
