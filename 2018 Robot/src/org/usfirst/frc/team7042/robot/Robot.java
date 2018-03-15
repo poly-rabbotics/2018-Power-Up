@@ -9,14 +9,20 @@ package org.usfirst.frc.team7042.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team7042.robot.choosers.ArmChooser;
 import org.usfirst.frc.team7042.robot.choosers.ControlChooser;
+import org.usfirst.frc.team7042.robot.choosers.StartChooser;
+import org.usfirst.frc.team7042.robot.choosers.Target;
+import org.usfirst.frc.team7042.robot.choosers.TargetChooser;
 import org.usfirst.frc.team7042.robot.commands.TeleopNoPID;
+import org.usfirst.frc.team7042.robot.commands.autonomous.AutoSequencer;
 import org.usfirst.frc.team7042.robot.commands.autonomous.FailsafeAuto;
 import org.usfirst.frc.team7042.robot.commands.autonomous.MoveDistance;
+import org.usfirst.frc.team7042.robot.commands.autonomous.TargetPosition;
 import org.usfirst.frc.team7042.robot.commands.autonomous.TurnDegrees;
 import org.usfirst.frc.team7042.robot.subsystems.*;
 import org.usfirst.frc.team7042.utils.PolyPrefs;
@@ -37,6 +43,8 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static ControlChooser controlChooser = new ControlChooser();
 	public static ArmChooser armsChooser = new ArmChooser();
+	public static TargetChooser target = new TargetChooser();
+	public static StartChooser start = new StartChooser();
 	public static final ArmWheels intake = new ArmWheels();
 	public static final Grab grabber = new Grab();
 
@@ -89,9 +97,48 @@ public class Robot extends TimedRobot {
 		TurnDegrees turn1 = new TurnDegrees(90);
 		MoveDistance move1 = new MoveDistance(2.7867);
 		
+		String fieldPos = DriverStation.getInstance().getGameSpecificMessage();
+		TargetPosition switchPos, scalePos;
 		
+		Command autoCommand;
+		if(fieldPos.length() >= 2) {
+			switchPos = posFromChar(fieldPos.charAt(0));
+			scalePos = posFromChar(fieldPos.charAt(1));
+			if(switchPos == null || scalePos == null) {
+				System.out.format("Recieved invalid data from FMS: \"%s\"\n", fieldPos);
+				autoCommand = new FailsafeAuto();
+				autoCommand.start();
+				return;
+			}
+		} else {
+			System.out.format("Recieved invalid data from FMS: \"%s\"\n", fieldPos);
+			autoCommand = new FailsafeAuto();
+			autoCommand.start();
+			return;
+		}
 		
-
+		switch(target.getSelected()) {
+		case SWITCH:
+			autoCommand = new AutoSequencer(Target.SWITCH, switchPos, start.getSelected());
+			return;
+		case SCALE:
+			autoCommand = new AutoSequencer(Target.SCALE, scalePos, start.getSelected());
+			return;
+		case FAILSAFE:
+			autoCommand = new FailsafeAuto();
+			return;
+		}
+		
+	}
+	
+	private TargetPosition posFromChar(char pos) {
+		if(pos == 'L')
+			return TargetPosition.LEFT;
+		else if(pos == 'R')
+			return TargetPosition.RIGHT;
+		else
+			System.out.format("Recieved invalid input \"%c\"\n", pos);
+		return null;
 	}
 
 	/**
