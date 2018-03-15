@@ -12,7 +12,7 @@ import org.usfirst.frc.team7042.utils.PolyPrefs;
  */
 public class FailsafeAuto extends Command {
 	
-	private static final double TIME = 3;
+	private static final double TIME = 5;
 	
 	private Timer timer = new Timer();
 	

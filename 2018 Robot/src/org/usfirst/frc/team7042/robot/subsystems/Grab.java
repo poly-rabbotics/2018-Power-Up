@@ -14,13 +14,13 @@ public class Grab extends Subsystem {
 
 	public DoubleSolenoid grabber = RobotMap.grabSolenoid;
 	
-	public boolean getOut() {
-		return grabber.get() == DoubleSolenoid.Value.kForward;
+	public boolean getGrabbed() {
+		return grabber.get() == DoubleSolenoid.Value.kReverse;
 	}
-	public void putOut() {
+	public void release() {
 		grabber.set(DoubleSolenoid.Value.kForward);
 	}
-	public void putIn() {
+	public void grab() {
 		grabber.set(DoubleSolenoid.Value.kReverse);
 	}
     public void initDefaultCommand() {
