@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		System.out.println(DriverStation.getInstance().getGameSpecificMessage());
+		/*System.out.println(DriverStation.getInstance().getGameSpecificMessage());
 		
 		new FailsafeAuto().start();
 		
@@ -130,7 +130,8 @@ public class Robot extends TimedRobot {
 			return TargetPosition.RIGHT;
 		else
 			System.out.format("Recieved invalid input \"%c\"\n", pos);
-		return null;
+		return null;*/
+		new FailsafeAuto().start();
 	}
 
 	/**
@@ -153,7 +154,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		System.out.format("Ls:%.2f, LC:%s\n", RobotMap.lift1.get(), RobotMap.liftEncoder.get());
+		//System.out.format("Ls:%.2f, LC:%s\n", RobotMap.lift1.get(), RobotMap.liftEncoder.get());
 		Scheduler.getInstance().run();
 	}
 
