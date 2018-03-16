@@ -62,12 +62,12 @@ public class F310Wrapper extends DriveController {
 
 	@Override
 	public boolean getMoveLift() {
-		return logitech.getRawButtonPressed(5);
+		return logitech.getRawButton(5);
 	}
 	
 	@Override
 	public boolean getGrab() {
-		return logitech.getRawButtonPressed(6);
+		return logitech.getRawButton(6);
 	}
 	
 	

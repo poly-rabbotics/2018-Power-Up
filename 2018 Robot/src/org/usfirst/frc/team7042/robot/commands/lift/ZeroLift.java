@@ -15,7 +15,7 @@ public class ZeroLift extends Command {
 	private Lift lift = Robot.lift;
 	
 	private static final double ZERO_SPEED = 0.2;
-	private static final double CUTOFF_CURRENT = 9.0;
+	private static final double CUTOFF_CURRENT = 0.9;
 	private static final int CUTOFF_TIME = 500;
 	
 	private PDPWrapper currentChecker = new PDPWrapper();
@@ -31,6 +31,7 @@ public class ZeroLift extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	lift.setSpeedNoLimit(-ZERO_SPEED);
+    	System.out.format("LC:%.2f RC:%.2f\n",RobotMap.pdp.getCurrent(RobotMap.LIFT_1_PDP),RobotMap.pdp.getCurrent(RobotMap.LIFT_2_PDP));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,6 +41,7 @@ public class ZeroLift extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("Zeroed");
     	lift.setSpeed(0);
     	lift.zeroLift();
     }

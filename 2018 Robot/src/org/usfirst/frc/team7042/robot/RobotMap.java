@@ -49,8 +49,8 @@ public class RobotMap {
 
     public static VictorSP lift1 = new VictorSP(4);
     //public static TalonSRX lift2 = new TalonSRX(1);
-    public static final int LIFT_1_PDP = 0;
-    public static final int LIFT_2_PDP = 1;
+    public static final int LIFT_1_PDP = 15;
+    public static final int LIFT_2_PDP = 14;
 
 
     public static PowerDistributionPanel pdp = new PowerDistributionPanel();
