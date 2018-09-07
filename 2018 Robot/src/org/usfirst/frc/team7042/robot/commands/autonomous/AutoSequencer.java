@@ -106,10 +106,9 @@ public class AutoSequencer extends CommandGroup {
             		addSequential(new MoveDistance(0.2032));
             		break;
             	case RIGHT:
-            		addSequential(new TurnDegrees(-90));
-            		addSequential(new MoveDistance(1.0668));
-            		addSequential(new TurnDegrees(90));
             		addSequential(new MoveDistance(2.5908));
+            		addSequential(new LiftUp(???));
+            		addSequential(new Eject(true));
             		break;
             	}
             	break;

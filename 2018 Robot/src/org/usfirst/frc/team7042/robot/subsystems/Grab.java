@@ -12,16 +12,16 @@ public class Grab extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	public DoubleSolenoid grabber = RobotMap.grabSolenoid;
+	public DoubleSolenoid grabby = RobotMap.grabSolenoid;
 	
 	public boolean getGrabbed() {
-		return grabber.get() == DoubleSolenoid.Value.kReverse;
+		return grabby.get() == DoubleSolenoid.Value.kReverse;
 	}
 	public void release() {
-		grabber.set(DoubleSolenoid.Value.kForward);
+		grabby.set(DoubleSolenoid.Value.kForward);
 	}
 	public void grab() {
-		grabber.set(DoubleSolenoid.Value.kReverse);
+		grabby.set(DoubleSolenoid.Value.kReverse);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
