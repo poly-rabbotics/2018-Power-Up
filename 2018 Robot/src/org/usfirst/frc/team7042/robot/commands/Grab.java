@@ -1,44 +1,46 @@
-package org.usfirst.frc.team7042.robot.commands.lift;
+package org.usfirst.frc.team7042.robot.commands;
 
 import org.usfirst.frc.team7042.robot.Robot;
-import org.usfirst.frc.team7042.robot.subsystems.Lift;
+import org.usfirst.frc.team7042.robot.RobotMap;
+import org.usfirst.frc.team7042.utils.PDPWrapper;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TeleopLift extends Command {
+public class Grab extends Command {
 	
-	private Lift lift = Robot.lift;
+
+	private static final double HUNT_SPEED = 0.8;
 	
-    public TeleopLift() {
-    	requires(lift);
+	private static final double CUTOFF_CURRENT = 5;
+	private static final int CUTOFF_TIME = 500;
+	
+	private PDPWrapper pdp;
+
+    public Grab() {
+    	requires(Robot.arms);
+    	pdp = new PDPWrapper();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.arms.grab();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double mr = Robot.controlChooser.getSelected().getLiftSpeed();
-    	if(mr == 0) {
-    		lift.drivePID();
-    	} else {
-    		lift.setSpeed(mr);
-    		lift.pid.setSetpointRelative(0);
-    	}
+    	Robot.arms.setIntakeSpeed(HUNT_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return pdp.checkOvercurrent(new int[] {RobotMap.ARM_WHEEL_1_PDP, RobotMap.ARM_WHEEL_2_PDP}, CUTOFF_CURRENT, CUTOFF_TIME);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	lift.setSpeed(0);
     }
 
     // Called when another command which requires one or more of the same

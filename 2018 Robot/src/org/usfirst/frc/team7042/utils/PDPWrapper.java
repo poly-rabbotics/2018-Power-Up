@@ -29,7 +29,7 @@ public class PDPWrapper {
 	 */
 	public boolean checkOvercurrent(int channel, double current, int cutofftime) {
 		if(pdp.getCurrent(channel) > current)
-			return getTimeMillis() - timers[channel] < cutofftime;
+			return getTimeMillis() - timers[channel] > cutofftime;
 		else
 			timers[channel] = getTimeMillis();
 		return false;
@@ -59,7 +59,7 @@ public class PDPWrapper {
 	 */
 	public boolean checkUndercurrent(int channel, double current, int cutofftime) {
 		if(pdp.getCurrent(channel) < current)
-			return getTimeMillis() - timers[channel] < cutofftime;
+			return getTimeMillis() - timers[channel] > cutofftime;
 		else
 			timers[channel] = getTimeMillis();
 		return false;

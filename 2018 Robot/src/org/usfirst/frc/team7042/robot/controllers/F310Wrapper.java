@@ -10,9 +10,10 @@ public class F310Wrapper extends DriveController {
 	
 	private static final double MOVE_CURVE = 2;
 	private static final double TURN_CURVE = 1;
-	private static final double LIFT_SPEED = 1;
+	private static final double ROTATE_SPEED = .2; //no more than .4
 	
 	private static final double DEADZONE = 0.05;
+	
 	
 	
 
@@ -44,30 +45,27 @@ public class F310Wrapper extends DriveController {
 
 	@Override
 	public boolean getKillPID() {
-		return logitech.getRawButton(1);
-	}
-
-	@Override
-	public double getLiftSpeed() {
-		/*if(logitech.getPOV() == 0|| logitech.getPOV() == 45 || logitech.getPOV() == 315)
-			return LIFT_SPEED;
-		else if(logitech.getPOV() == 180 ||logitech.getPOV() ==  135 ||logitech.getPOV() ==  215)
-			return -LIFT_SPEED;
-		else
-			return 0;*/
-		
-		return clip(logitech.getRawAxis(3) - logitech.getRawAxis(2), -1, 1);
-		 
-	}
-
-	@Override
-	public boolean getMoveLift() {
-		return logitech.getRawButton(5);
+		return logitech.getRawButton(4);
 	}
 	
 	@Override
 	public boolean getGrab() {
 		return logitech.getRawButton(6);
+	}
+	
+	@Override
+	public boolean getShoot() {
+		return logitech.getRawButton(5);
+	}
+	
+	public double getRotateArms() {
+		if(logitech.getRawButton(1)){ //x
+			return -ROTATE_SPEED;
+		}
+		else if(logitech.getRawButton(3)){ //a
+			return ROTATE_SPEED;
+		}
+		return 0;
 	}
 	
 	

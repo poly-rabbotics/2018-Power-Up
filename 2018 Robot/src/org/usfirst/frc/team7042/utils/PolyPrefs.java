@@ -6,7 +6,7 @@ public class PolyPrefs {
 	
 	private static Preferences prefs = Preferences.getInstance();
 	
-	private static final double AUTO_SPEED = 0.25;
+	private static final double AUTO_SPEED = -0.95;
 	private static final double TILT_RANGE = 2;
 	private static final double ENC_TICKS = 700; // number of encoder ticks per meter of travel
 	private static final double LIFT_ENC_TICKS = 10; // ticks per meter of the lift

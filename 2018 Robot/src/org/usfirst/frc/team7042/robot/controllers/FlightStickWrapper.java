@@ -44,27 +44,22 @@ public class FlightStickWrapper extends DriveController {
 	public boolean getKillPID() {
 		return flightStick.getRawButton(7);
 	}
-
-
-	@Override
-	public boolean getMoveLift() {
-		return flightStick.getRawButtonPressed(3);
-		
-	}
-	@Override
-	
-	public double getLiftSpeed() {
-		if(flightStick.getPOV() == 0|| flightStick.getPOV() == 45 || flightStick.getPOV() == 315)
-			return LIFT_SPEED;
-		else if(flightStick.getPOV() == 180 ||flightStick.getPOV() ==  135 ||flightStick.getPOV() ==  215)
-			return -LIFT_SPEED;
-		else
-			return 0;
-	}
 	
 	@Override
 	public boolean getGrab() {
 		return flightStick.getRawButton(1);
+	}
+
+	@Override
+	public double getRotateArms() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getShoot() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

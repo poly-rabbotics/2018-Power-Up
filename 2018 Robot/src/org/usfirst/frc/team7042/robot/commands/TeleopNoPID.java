@@ -23,6 +23,7 @@ public class TeleopNoPID extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("driving");
     }
 
     // Called repeatedly when this Command is scheduled to run

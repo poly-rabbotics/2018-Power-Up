@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 /**
  *
  */
-public class MoveLiftTrigger extends Trigger {
+public class ShootTrigger extends Trigger {
 
     public boolean get() {
-        return Robot.controlChooser.getSelected().getMoveLift();
+        return Robot.controlChooser.getSelected().getShoot();
     }
 }

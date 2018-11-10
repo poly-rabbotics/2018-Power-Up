@@ -1,30 +1,30 @@
-package org.usfirst.frc.team7042.robot.commands.lift;
+package org.usfirst.frc.team7042.robot.commands;
 
 import org.usfirst.frc.team7042.robot.Robot;
-import org.usfirst.frc.team7042.robot.subsystems.Lift;
+import org.usfirst.frc.team7042.robot.RobotMap;
+import org.usfirst.frc.team7042.utils.PDPWrapper;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MaintainLiftHeight extends Command {
-
-	private Lift lift = Robot.lift;
+public class Hunt extends Command {
 	
-    public MaintainLiftHeight() {
-        requires(lift);
+	private static final double HUNT_SPEED = 0.8;
+
+    public Hunt() {
+        requires(Robot.arms);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	lift.pid.setSetpointRelative(0);
-    	lift.pid.enable();
+    	Robot.arms.open();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	lift.drivePID();
+    	Robot.arms.setIntakeSpeed(HUNT_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,12 +34,10 @@ public class MaintainLiftHeight extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	lift.pid.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	lift.pid.disable();
     }
 }

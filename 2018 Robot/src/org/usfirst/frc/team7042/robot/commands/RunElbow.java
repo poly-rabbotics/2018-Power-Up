@@ -1,33 +1,25 @@
-package org.usfirst.frc.team7042.robot.commands.autonomous;
+package org.usfirst.frc.team7042.robot.commands;
 
-import org.usfirst.frc.team7042.robot.RobotMap;
-import org.usfirst.frc.team7042.robot.subsystems.Grab;
+import org.usfirst.frc.team7042.robot.Robot;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Eject extends Command {
-	
-	grab = Robot.;
-	
-    Eject (boolean drop) {
-    	super();
-    	requires(grabby);
+public class RunElbow extends Command {
+
+    public RunElbow() {
+        requires(Robot.elbow);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(drop == true)
-    		grab.release();
-    	else
-    		break;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.elbow.rotateArms(Robot.controlChooser.getSelected().getRotateArms());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -13,6 +13,7 @@ import org.usfirst.frc.team7042.utils.PolyPrefs;
 public class FailsafeAuto extends Command {
 	
 	private static final double TIME = 5;
+	private static final double SPEED = -0.95;
 	
 	private Timer timer = new Timer();
 	
@@ -29,7 +30,7 @@ public class FailsafeAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drive.arcadeDrive(-1, 0, PolyPrefs.getAutoSpeed());
+    	drive.arcadeDrive(0, 0, SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +40,7 @@ public class FailsafeAuto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	drive.stop();
+    	drive.arcadeDrive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

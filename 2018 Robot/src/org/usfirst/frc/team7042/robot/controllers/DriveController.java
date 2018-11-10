@@ -29,23 +29,14 @@ public abstract class DriveController {
 	 */
 	abstract public boolean getKillPID();
 	
-	/**
-	 * get requested move speed of lift
-	 * @return
-	 */
-	abstract public double getLiftSpeed();
-	
-	/**
-	 * get to move lift forward/backwards
-	 * @return
-	 */
-	abstract public boolean getMoveLift();
+	abstract public double getRotateArms();
 	
 	/**
 	 * get piston grab
 	 * @return
 	 */
 	abstract public boolean getGrab();
+	abstract public boolean getShoot();
 	
 	public double map(double val, double inmin, double inmax, double outmin, double outmax) {
     	return (((val - inmin) / (inmax - inmin)) * (outmax - outmin)) + outmin;
