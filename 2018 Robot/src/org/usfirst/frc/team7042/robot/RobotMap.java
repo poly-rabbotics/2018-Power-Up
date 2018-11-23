@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.VictorSP;
  */
 public class RobotMap {
 	
-	public static Spark frontLeft = new Spark(0);
+	public static Spark frontLeft = new Spark(0); //This is a test
 	public static Spark backLeft = new Spark(1);
 	public static Spark frontRight = new Spark(2);
 	public static Spark backRight = new Spark(3);
