@@ -10,7 +10,7 @@ public class F310Wrapper extends DriveController {
 	
 	private static final double MOVE_CURVE = 2;
 	private static final double TURN_CURVE = 1;
-	private static final double ROTATE_SPEED = .2; //no more than .4
+	private static final double ROTATE_SPEED = .8; //no more than .4
 	
 	private static final double DEADZONE = 0.05;
 	

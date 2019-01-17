@@ -31,7 +31,7 @@ public class TeleopNoPID extends Command {
     	DriveController controller = chooser.getSelected();
     	if(controller.getReverseDirection())
     		reversed = !reversed;
-    	drive.arcadeDrive((reversed)?-controller.getMoveRequest():controller.getMoveRequest(), controller.getTurnRequest(), controller.getSpeedLimiter());
+    	drive.arcadeDrive(0, controller.getTurnRequest(), (reversed)?-controller.getMoveRequest():controller.getMoveRequest());
     }
 
     // Make this return true when this Command no longer needs to run execute()
